@@ -343,7 +343,7 @@ body::-webkit-scrollbar {
             
         <div class="classMasteredList">
             <span id="sumWordMastered">0 mastered words (wont be shown):</span>
-            <select style="height: 50px;" multiple="multiple" id="Mastered-wordList">
+            <select style="height: 50px;" class="js-example-basic-multiple js-states form-control" multiple="multiple" id="Mastered-wordList">
             </select>
         </div>
         
@@ -467,7 +467,9 @@ body::-webkit-scrollbar {
     {
         $('#end-number-wordList').select2({theme: "classic"});
         $('#start-number-wordList').select2({theme: "classic"});
-        $('#Mastered-wordList').select2({theme: "classic"});
+        $('#Mastered-wordList').select2({
+                width: 'resolve' ,// need to override the changed default
+            });
         $('#Option-wordList').select2({theme: "classic"});
         $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
         $('#selectLinks').on('select2:select', function (e) {         
@@ -667,7 +669,7 @@ body::-webkit-scrollbar {
             const myAudioUK = document.getElementById('myAudioUK');
             myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=1";
 
-            myAudioUK.play();
+            //myAudioUK.play();
 
             const myAudioUS = document.getElementById('myAudioUS');
             myAudioUS.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=2";
