@@ -272,7 +272,7 @@ body::-webkit-scrollbar {
     padding: 5px;
 }
 
-.ControlRow span {
+.ControlRow div {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -389,15 +389,18 @@ body::-webkit-scrollbar {
         </div>
         <div id="CardControl">
             <div class="ControlRow">
-            <span id="PreviousCard"><i class="fa fa-step-backward" aria-hidden="true"></i></span>    
-            <span id="PausePlay"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
-                <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></span>
-            <span id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></span>
+            <div id="PreviousCard"><i class="fa fa-step-backward" aria-hidden="true"></i></div>    
+            <div id="PausePlay"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
+                <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
+            <div id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
         </div>
             <div class="ControlRow">
-                <span id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></span>
-                <span style="font-size:1.2rem" id="CardIDNumber"></span>
-                <span id="AddToMasteredList"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
+                <div style="display:flex; flex-direction: column;">
+                    <span style="font-size: 1rem" id="CardIDNumber"></span>
+                    <span style="font-size: 1rem" id="Paging"></span>
+                </div>
+                <div id="AddToMasteredList"><i class="fa fa-times" aria-hidden="true"></i></div>
             </div>           
         </div>
     </div>
@@ -466,7 +469,7 @@ body::-webkit-scrollbar {
         $('#start-number-wordList').select2({theme: "classic"});
         $('#Mastered-wordList').select2({theme: "classic"});
         $('#Option-wordList').select2({theme: "classic"});
-        $('#selectLinks').select2({theme: "classic"});
+        $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
         $('#selectLinks').on('select2:select', function (e) {         
             var data = e.params.data;
             window.open(data.element.title);
@@ -601,6 +604,7 @@ body::-webkit-scrollbar {
         $("#Mastered-wordList").on('change', function(){     
             var aTempArray = $(this).val();
             localStorage.setItem("MasteredWordList", $(this).val());
+            console.log(aTempArray);
             if (aTempArray!=null)
             {
                 $("#sumWordMastered").text(aTempArray.length + ` mastered words (wont be shown)`);
@@ -625,12 +629,13 @@ body::-webkit-scrollbar {
 
         function showWord(i) 
         {          
-            document.getElementById('ACard').innerHTML = "The deck is empty";  
+            document.getElementById('ACard').innerHTML = "Empty";  
             if ((i>=0) && (i< WordListArray.length))
             {                
             
-            let aString = `W_` + i + ` (` + FlashCardList.indexOf(i) + `/` + FlashCardList.length +`)`;
-            $('#CardIDNumber').text(aString);
+            let aString = `(` + FlashCardList.indexOf(i) + `/` + FlashCardList.length +`)`;
+            $('#CardIDNumber').text(i);
+            $('#Paging').text(aString);
             $('.verticalWord').text(WordListArray[i].wordString);
              
             let linkOptions = document.getElementById('selectLinks').options;
@@ -662,7 +667,7 @@ body::-webkit-scrollbar {
             const myAudioUK = document.getElementById('myAudioUK');
             myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=1";
 
-            myAudioUK.play();
+            //myAudioUK.play();
 
             const myAudioUS = document.getElementById('myAudioUS');
             myAudioUS.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=2";
@@ -905,15 +910,18 @@ body::-webkit-scrollbar {
                 $(".PlayButton").toggle();
             }           
             //wordCountingI=wordCountingI-1;
+            console.log(`MasteredWordList`, MasteredWordList);
             var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
+            console.log(`realPosition`, realPosition);
             MasteredWordList.push(FlashCardList[realPosition]);
+            console.log(`MasteredWordList`, MasteredWordList);
             $("#Mastered-wordList").val(MasteredWordList).trigger("change.select2");
             localStorage.setItem("MasteredWordList", MasteredWordList);
             FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
             localStorage.setItem("FlashCardList", FlashCardList);
             //prepareList(FlashCardOption);
             //wordCountingI=wordCountingI+1;            
-            showWord(FlashCardList[realPosition]);
+            showWord(FlashCardList[realPosition+1]);
             console.log(`myTimer.cleared`,myTimer);
         });
 
