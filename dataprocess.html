@@ -337,7 +337,7 @@ body::-webkit-scrollbar {
 
         <div class="classEndNumber">
             <label style="width: 110px" for="number-pattern">End No.</label>
-            <input style="margin-right: 5px; width: 70px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="99"> 
+            <input style="margin-right: 5px; width: 70px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
             <select style="flex-grow:1" id="end-number-wordList"></select >
         </div>
             
@@ -412,7 +412,7 @@ body::-webkit-scrollbar {
     var myTimer,myOldTimer;
 
     //Local Storage variables
-    let StartWordID=0,EndWordID=50,MasteredWordList=[],FlashCardList=[],FlashCardOption='asc',WaitTime=5000,wordCountingI=0;
+    let StartWordID=0,EndWordID=50,MasteredWordList=[],FlashCardList=[],FlashCardOption='shuffle',WaitTime=5000,wordCountingI=0;
 
     var $loading = $('#loadingDiv').hide();
 
@@ -539,6 +539,7 @@ body::-webkit-scrollbar {
             
             //console.log("trigger change");
         } else {            
+            $("#Mastered-wordList").val(['50']).trigger("change");
             console.log(`MasteredWordList not Exist`);
         }
 
