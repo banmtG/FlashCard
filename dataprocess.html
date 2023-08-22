@@ -529,6 +529,7 @@ body::-webkit-scrollbar {
             console.log(`EndWordID Loaded =`,EndWordID);
         } else {
             localStorage.setItem("EndWordID", $('#EndID').val());
+            $("#end-number-wordList" ).val(50).trigger('change');
             console.log(`EndWordID not Exist`);
         }
 
@@ -536,10 +537,9 @@ body::-webkit-scrollbar {
             MasteredWordList = localStorage.getItem("MasteredWordList").split(',');
             console.log(`MasteredWordList`,MasteredWordList);
             $("#Mastered-wordList").val(MasteredWordList).trigger("change");
-            
             //console.log("trigger change");
         } else {            
-            $("#Mastered-wordList").val(['50']).trigger("change");
+           
             console.log(`MasteredWordList not Exist`);
         }
 
