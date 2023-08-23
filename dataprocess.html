@@ -745,9 +745,10 @@ body::-webkit-scrollbar {
             var rawList=[];
             console.log(`prepareList StartWordID`, StartWordID);
             console.log(`prepareList EndWordID`, EndWordID);
-            for (let j=StartWordID;j<=EndWordID;j++)
+            for (var jj=parseInt(StartWordID);jj<=parseInt(EndWordID);jj++)
             {
-                rawList.push(j.toString());
+                console.log(jj);
+                rawList.push(jj.toString());
             }
 
             console.log(rawList); 
