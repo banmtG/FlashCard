@@ -26,9 +26,6 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
-        <script src="hammer.min.js"></script>
-
 <style>
 .loader {
     position: fixed;
@@ -334,14 +331,14 @@ body::-webkit-scrollbar {
     <div class="settingContainer">
         <h1 style="text-align: center";>1715 IELTS WORDS <br>FLASH CARD APP</h1>
         <div class="classStartNumber">
-            <label style="width: 110px" for="number-pattern">Start No.</label>
+            <label style="width: 110px" form="number-pattern">Start No.</label>
             <input style="margin-right: 5px; width: 70px;" type="number" name="number" pattern="[0-9]*" id="StartID" value="0"> 
             <select style="flex-grow:1" id="start-number-wordList"></select >
         </div>
         
 
         <div class="classEndNumber">
-            <label style="width: 110px" for="number-pattern">End No.</label>
+            <label style="width: 110px" form="number-pattern">End No.</label>
             <input style="margin-right: 5px; width: 70px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
             <select style="flex-grow:1" id="end-number-wordList"></select >
         </div>
@@ -376,7 +373,7 @@ body::-webkit-scrollbar {
         </div>
 
     </div>  
-    <div class="Card_container" id="Card_container" style="display:none">
+    <div class="Card_container" style="display:none">
         <div class="aCardContainer">
             <div class="verticalWord">Abandon</div>
             <div id="ACard"></div>
@@ -424,7 +421,7 @@ body::-webkit-scrollbar {
     FlashCardList=[],
     FlashCardOption='shuffle',
     WaitTime=5000,
-    wordCountingI=0;
+    wordCountingI=0;  
 
     var $loading = $('#loadingDiv').hide();
 
@@ -468,14 +465,8 @@ body::-webkit-scrollbar {
             return array;
     }
 
-    $(document).ready(function() {
-
-      
-
-    });
-
-// initialise control
-    function initialiseControl() 
+  // initialise control
+  function initialiseControl() 
     {
         $('#end-number-wordList').select2({theme: "classic"});
         $('#start-number-wordList').select2({theme: "classic"});
@@ -639,30 +630,8 @@ body::-webkit-scrollbar {
             localStorage.setItem("WaitTime", WaitTime);  
         });
     }
-
-// Show Card
-
-        var myElement = document.getElementById('Card_container');
-
-        // create a simple instance
-        // by default, it only adds horizontal recognizers
-        var mc = new Hammer(myElement);
-
-        // listen to events...
-        mc.on("swipeleft", function(ev) {
-            $('#PreviousCard').trigger( "click" );
-            //myElement.textContent = ev.type +" gesture detected.";
-        });
-
-        mc.on("swiperight", function(ev) {
-            $('#NextCard').trigger( "click" );
-            //myElement.textContent = ev.type +" gesture detected.";
-        });
-
-
-
-
-        function showWord(i) 
+    
+    function showWord(i) 
         {          
             document.getElementById('ACard').innerHTML = "Empty";  
             if ((i>=0) && (i< WordListArray.length))
@@ -724,8 +693,6 @@ body::-webkit-scrollbar {
         }
 
         
-
-
         function shuffle(array) {
             let currentIndex = array.length,  randomIndex;
             // While there remain elements to shuffle.
@@ -806,187 +773,185 @@ body::-webkit-scrollbar {
 
         const btnStop = document.getElementById('Continue_Flash_Card');
 
-        btnStop.addEventListener('click', event => {
-            if (localStorage.getItem('MasteredWordList') !== null) 
-            MasteredWordList = localStorage.getItem("MasteredWordList").split(',');
-        // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
-            //prepareList(FlashCardOption);
-           // console.log(`wordCountingI`,wordCountingI);
-        if (wordCountingI<1) wordCountingI=1;
-            wordCountingI--;
+btnStop.addEventListener('click', event => {
+    if (localStorage.getItem('MasteredWordList') !== null) 
+    MasteredWordList = localStorage.getItem("MasteredWordList").split(',');
+// if (wordCountingI<StartNumber) wordCountingI=StartNumber;
+    //prepareList(FlashCardOption);
+   // console.log(`wordCountingI`,wordCountingI);
+if (wordCountingI<1) wordCountingI=1;
+    wordCountingI--;
 
-            $('.Card_container').show();
-            window.clearTimeout(myTimer);
-            PlaytoPause ();
-            timer();      
+    $('.Card_container').show();
+    window.clearTimeout(myTimer);
+    PlaytoPause ();
+    timer();      
 
-        });
-   
-        $('#BacktoMenu').on('click', function() {
-            $('.Card_container').hide();
-            window.clearTimeout(myTimer);
-            console.log(`myTimer.cleared`,myTimer);
-        });
+});
 
-        $('#PreviousCard').on('click', function() {
-            if ($('#PauseBtn').is(':visible'))
-            {
-                window.clearTimeout(myTimer);
-                console.log(`myTimer.cleared`,myTimer);
-                $(".PlayButton").toggle();
-            }           
-          
-           // console.log(`myTimer`, myTimer);
-            var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
-            console.log(`wordCountingI`, wordCountingI);
-            //wordCountingI =  $('#CardIDNumber').text();
-            console.log(`realPosition`, realPosition);
-            if (wordCountingI>realPosition) wordCountingI=realPosition;
+$('#BacktoMenu').on('click', function() {
+    $('.Card_container').hide();
+    window.clearTimeout(myTimer);
+    console.log(`myTimer.cleared`,myTimer);
+});
 
-
-           console.log(`wordCountingI`, wordCountingI);
-            //wordCountingI =  $('#CardIDNumber').text();
-           // console.log(`realPosition`, realPosition);
-
-           console.log(`wordCountingI s1`, wordCountingI);
-
-           
-            console.log(`wordCountingI s2`, wordCountingI);
-            wordCountingI--;
-            console.log(`wordCountingI s3`, wordCountingI);
-
-            if (wordCountingI<0) {
-                wordCountingI=FlashCardList.length-1;
-               //$('#CardIDNumber').text(wordCountingI);
-            }
-            // if (wordCountingI-1>realPosition) wordCountingI--;
-            // if (wordCountingI=realPosition) wordCountingI++;
-
-            showWord(FlashCardList[wordCountingI]);
-
-           
-
-         //   console.log(`wordCountingI`, wordCountingI);
-
-           
-            
-        });
-
-        $('#NextCard').on('click', function() {
-
-            if ($('#PauseBtn').is(':visible'))
-            {
-                window.clearTimeout(myTimer);
-                console.log(`myTimer.cleared`,myTimer);
-                $(".PlayButton").toggle();
-            }           
-            //console.log(`myTimer`, myTimer);
-            //console.log(`$('#CardIDNumber').text()`, $('#CardIDNumber').text());
-            var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
-            console.log(`wordCountingI`, wordCountingI);
-            //wordCountingI =  $('#CardIDNumber').text();               
-          
-
-
-           // console.log(`wordCountingI`, wordCountingI);
-            //wordCountingI =  $('#CardIDNumber').text();
-            console.log(`realPosition`, realPosition);
-
-            
-
-            if (realPosition==FlashCardList.length-1) {
-                wordCountingI=-1;
-               //$('#CardIDNumber').text(wordCountingI);
-            }
-
-            wordCountingI++;
-
-            console.log(`wordCountingI s1`, wordCountingI);
-
-            if (wordCountingI-1>realPosition) wordCountingI--;
-            console.log(`wordCountingI s2`, wordCountingI);
-
-            if (wordCountingI==realPosition) wordCountingI++;
-            console.log(`wordCountingI s3`, wordCountingI);
-
-            showWord(FlashCardList[wordCountingI]);
-           
-
-           
-            console.log(`wordCountingI`, wordCountingI);
-
-        });
-
-        $('#PausePlay').on('click', function() {
-           
-            //console.log(`myTimer.cleared`,myTimer);
-            if ($('#PlayBtn').is(':visible'))
-            {
-                window.clearTimeout(myTimer);
-                timer();
-                console.log(`myTimer.cleared`,myTimer);
-            }
-
-            if ($('#PauseBtn').is(':visible'))
-            {
-                window.clearTimeout(myTimer);
-                console.log(`myTimer.cleared`,myTimer);
-            }
-
-            $(".PlayButton").toggle();
-
-        });
-
-        // $('#PauseBtn').on('click', function() {
-        //     console.log("fdfdf");
-        //     console.log(`myTimer.cleared`,myTimer);
-        //     window.clearTimeout(myTimer);
-        //     console.log(`myTimer.cleared`,myTimer);
-        // });
-
-        // $('#PlayBtn').on('click', function() {
-        //     //wordCountingI=wordCountingI-1;
-        //     window.clearTimeout(myTimer);
-        //     timer();
-        //     console.log(`myTimer.cleared`,myTimer);
-        // });
-
-        
-
-        $('#AddToMasteredList').on('click', function() {
-           
-            if ($('#PauseBtn').is(':visible'))
-            {
-                window.clearTimeout(myTimer);
-                console.log(`myTimer.cleared`,myTimer);
-                $(".PlayButton").toggle();
-            }           
-            //wordCountingI=wordCountingI-1;
-            console.log(`MasteredWordList`, MasteredWordList);
-            var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
-            console.log(`realPosition`, realPosition);
-            MasteredWordList.push(FlashCardList[realPosition]);
-            console.log(`MasteredWordList`, MasteredWordList);
-            $("#Mastered-wordList").val(MasteredWordList).trigger("change.select2");
-            localStorage.setItem("MasteredWordList", MasteredWordList);
-            FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
-            localStorage.setItem("FlashCardList", FlashCardList);
-            //prepareList(FlashCardOption);
-            //wordCountingI=wordCountingI+1;            
-            showWord(FlashCardList[realPosition+1]);
-            console.log(`myTimer.cleared`,myTimer);
-        });
-
-
-    function FunctionAfterDataLoaded() 
+$('#PreviousCard').on('click', function() {
+    if ($('#PauseBtn').is(':visible'))
     {
-        load3SelectWithWords();
-        initialiseControl();
-        dealWithOnChange();
-        readFromLocalStorage();    
+        window.clearTimeout(myTimer);
+        console.log(`myTimer.cleared`,myTimer);
+        $(".PlayButton").toggle();
+    }           
+  
+   // console.log(`myTimer`, myTimer);
+    var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
+    console.log(`wordCountingI`, wordCountingI);
+    //wordCountingI =  $('#CardIDNumber').text();
+    console.log(`realPosition`, realPosition);
+    if (wordCountingI>realPosition) wordCountingI=realPosition;
+
+
+   console.log(`wordCountingI`, wordCountingI);
+    //wordCountingI =  $('#CardIDNumber').text();
+   // console.log(`realPosition`, realPosition);
+
+   console.log(`wordCountingI s1`, wordCountingI);
+
+   
+    console.log(`wordCountingI s2`, wordCountingI);
+    wordCountingI--;
+    console.log(`wordCountingI s3`, wordCountingI);
+
+    if (wordCountingI<0) {
+        wordCountingI=FlashCardList.length-1;
+       //$('#CardIDNumber').text(wordCountingI);
     }
+    // if (wordCountingI-1>realPosition) wordCountingI--;
+    // if (wordCountingI=realPosition) wordCountingI++;
+
+    showWord(FlashCardList[wordCountingI]);
+
+   
+
+ //   console.log(`wordCountingI`, wordCountingI);
+
+   
+    
+});
+
+$('#NextCard').on('click', function() {
+
+    if ($('#PauseBtn').is(':visible'))
+    {
+        window.clearTimeout(myTimer);
+        console.log(`myTimer.cleared`,myTimer);
+        $(".PlayButton").toggle();
+    }           
+    //console.log(`myTimer`, myTimer);
+    //console.log(`$('#CardIDNumber').text()`, $('#CardIDNumber').text());
+    var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
+    console.log(`wordCountingI`, wordCountingI);
+    //wordCountingI =  $('#CardIDNumber').text();               
+  
+
+
+   // console.log(`wordCountingI`, wordCountingI);
+    //wordCountingI =  $('#CardIDNumber').text();
+    console.log(`realPosition`, realPosition);
+
     
 
+    if (realPosition==FlashCardList.length-1) {
+        wordCountingI=-1;
+       //$('#CardIDNumber').text(wordCountingI);
+    }
+
+    wordCountingI++;
+
+    console.log(`wordCountingI s1`, wordCountingI);
+
+    if (wordCountingI-1>realPosition) wordCountingI--;
+    console.log(`wordCountingI s2`, wordCountingI);
+
+    if (wordCountingI==realPosition) wordCountingI++;
+    console.log(`wordCountingI s3`, wordCountingI);
+
+    showWord(FlashCardList[wordCountingI]);
+   
+
+   
+    console.log(`wordCountingI`, wordCountingI);
+
+});
+
+$('#PausePlay').on('click', function() {
+   
+    //console.log(`myTimer.cleared`,myTimer);
+    if ($('#PlayBtn').is(':visible'))
+    {
+        window.clearTimeout(myTimer);
+        timer();
+        console.log(`myTimer.cleared`,myTimer);
+    }
+
+    if ($('#PauseBtn').is(':visible'))
+    {
+        window.clearTimeout(myTimer);
+        console.log(`myTimer.cleared`,myTimer);
+    }
+
+    $(".PlayButton").toggle();
+
+});
+
+// $('#PauseBtn').on('click', function() {
+//     console.log("fdfdf");
+//     console.log(`myTimer.cleared`,myTimer);
+//     window.clearTimeout(myTimer);
+//     console.log(`myTimer.cleared`,myTimer);
+// });
+
+// $('#PlayBtn').on('click', function() {
+//     //wordCountingI=wordCountingI-1;
+//     window.clearTimeout(myTimer);
+//     timer();
+//     console.log(`myTimer.cleared`,myTimer);
+// });
+
+
+
+$('#AddToMasteredList').on('click', function() {
+   
+    if ($('#PauseBtn').is(':visible'))
+    {
+        window.clearTimeout(myTimer);
+        console.log(`myTimer.cleared`,myTimer);
+        $(".PlayButton").toggle();
+    }           
+    //wordCountingI=wordCountingI-1;
+    console.log(`MasteredWordList`, MasteredWordList);
+    var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
+    console.log(`realPosition`, realPosition);
+    MasteredWordList.push(FlashCardList[realPosition]);
+    console.log(`MasteredWordList`, MasteredWordList);
+    $("#Mastered-wordList").val(MasteredWordList).trigger("change.select2");
+    localStorage.setItem("MasteredWordList", MasteredWordList);
+    FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
+    localStorage.setItem("FlashCardList", FlashCardList);
+    //prepareList(FlashCardOption);
+    //wordCountingI=wordCountingI+1;            
+    showWord(FlashCardList[realPosition+1]);
+    console.log(`myTimer.cleared`,myTimer);
+});
+
+
+function FunctionAfterDataLoaded() 
+{
+load3SelectWithWords();
+initialiseControl();
+dealWithOnChange();
+readFromLocalStorage();    
+}
 
 </script>
 
