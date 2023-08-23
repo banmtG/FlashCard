@@ -646,8 +646,7 @@ body::-webkit-scrollbar {
 
         // create a simple instance
         // by default, it only adds horizontal recognizers
-        var touchActions = ['auto', 'pan-y', 'pan-x', 'pan-x pan-y', 'none'];
-        var mc = new Hammer(myElement,{touchAction : touchActions});
+        var mc = new Hammer(myElement);
 
         // listen to events...
         mc.on("swipeleft", function(ev) {
@@ -660,9 +659,11 @@ body::-webkit-scrollbar {
             //myElement.textContent = ev.type +" gesture detected.";
         });
 
-        mc.get('pinch').set({ enable: true });
+        mc.on("tap", function(ev) {
+            $('#PausePlay').trigger( "click" );
+            //myElement.textContent = ev.type +" gesture detected.";
+        });
 
-  
 
 
 
