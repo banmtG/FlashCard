@@ -635,8 +635,8 @@ body::-webkit-scrollbar {
             document.getElementById('ACard').innerHTML = "Empty";  
             if ((i>=0) && (i< WordListArray.length))
             {                
-            
-            let aString = `(` + FlashCardList.indexOf(i) + `/` + FlashCardList.length +`)`;
+            let totalCard = FlashCardList.length-1;
+            let aString = `(` + FlashCardList.indexOf(i) + `/` + totalCard  +`)`;
             $('#CardIDNumber').text(i);
             $('#Paging').text(aString);
             $('.verticalWord').text(WordListArray[i].wordString);
@@ -808,24 +808,31 @@ body::-webkit-scrollbar {
             var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
             console.log(`wordCountingI`, wordCountingI);
             //wordCountingI =  $('#CardIDNumber').text();
-          //  console.log(`realPosition`, realPosition);
+            console.log(`realPosition`, realPosition);
             if (wordCountingI>realPosition) wordCountingI=realPosition;
 
 
-           // console.log(`wordCountingI`, wordCountingI);
+           console.log(`wordCountingI`, wordCountingI);
             //wordCountingI =  $('#CardIDNumber').text();
            // console.log(`realPosition`, realPosition);
 
-            
+           console.log(`wordCountingI s1`, wordCountingI);
+
+           
+            console.log(`wordCountingI s2`, wordCountingI);
+            wordCountingI--;
+            console.log(`wordCountingI s3`, wordCountingI);
 
             if (wordCountingI<0) {
                 wordCountingI=FlashCardList.length-1;
                //$('#CardIDNumber').text(wordCountingI);
             }
+            // if (wordCountingI-1>realPosition) wordCountingI--;
+            // if (wordCountingI=realPosition) wordCountingI++;
 
             showWord(FlashCardList[wordCountingI]);
 
-            wordCountingI--;
+           
 
          //   console.log(`wordCountingI`, wordCountingI);
 
@@ -841,30 +848,40 @@ body::-webkit-scrollbar {
                 console.log(`myTimer.cleared`,myTimer);
                 $(".PlayButton").toggle();
             }           
-          
-            console.log(`myTimer`, myTimer);
+            //console.log(`myTimer`, myTimer);
+            //console.log(`$('#CardIDNumber').text()`, $('#CardIDNumber').text());
             var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
             console.log(`wordCountingI`, wordCountingI);
-            //wordCountingI =  $('#CardIDNumber').text();
-           console.log(`realPosition`, realPosition);
-         //   if (wordCountingI>realPosition) wordCountingI=realPosition;
+            //wordCountingI =  $('#CardIDNumber').text();               
+          
 
 
-            console.log(`wordCountingI`, wordCountingI);
+           // console.log(`wordCountingI`, wordCountingI);
             //wordCountingI =  $('#CardIDNumber').text();
             console.log(`realPosition`, realPosition);
 
             
 
-            if (wordCountingI>FlashCardList.length-1) {
-                wordCountingI=0;
+            if (realPosition==FlashCardList.length-1) {
+                wordCountingI=-1;
                //$('#CardIDNumber').text(wordCountingI);
             }
 
-            showWord(FlashCardList[wordCountingI]);
-
             wordCountingI++;
-               console.log(`wordCountingI`, wordCountingI);
+
+            console.log(`wordCountingI s1`, wordCountingI);
+
+            if (wordCountingI-1>realPosition) wordCountingI--;
+            console.log(`wordCountingI s2`, wordCountingI);
+
+            if (wordCountingI==realPosition) wordCountingI++;
+            console.log(`wordCountingI s3`, wordCountingI);
+
+            showWord(FlashCardList[wordCountingI]);
+           
+
+           
+            console.log(`wordCountingI`, wordCountingI);
 
         });
 
