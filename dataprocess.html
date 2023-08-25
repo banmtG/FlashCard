@@ -165,6 +165,7 @@ body::-webkit-scrollbar {
     top: 0;
     left: 0; 
     background-color:rgba(0, 0, 0, 0.5);
+    overflow: hidden;
 }
 
 .aCardContainer {
@@ -190,6 +191,7 @@ body::-webkit-scrollbar {
 
 #ACard {   
     width:90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -217,7 +219,7 @@ body::-webkit-scrollbar {
 
 #ACard .pronouce {
     font-weight: 300;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 #ACard .definition p {
@@ -399,12 +401,12 @@ body::-webkit-scrollbar {
                 <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
             <div id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
         </div>
-            <div class="ControlRow">
-                <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
+            <div class="ControlRow">               
                 <div style="display:flex; flex-direction: column;">
                     <span style="font-size: 1rem" id="CardIDNumber"></span>
                     <span style="font-size: 1rem" id="Paging"></span>
                 </div>
+                <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
                 <div id="AddToMasteredList"><i class="fa fa-times" aria-hidden="true"></i></div>
             </div>           
         </div>
@@ -642,29 +644,7 @@ body::-webkit-scrollbar {
 
 // Show Card
 
-        var myElement = document.getElementById('aCardContainer');
-
-        // create a simple instance
-        // by default, it only adds horizontal recognizers
-        var mc = new Hammer(myElement);
-
-        // listen to events...
-        mc.on("swipeleft", function(ev) {
-            $('#PreviousCard').trigger( "click" );
-            //myElement.textContent = ev.type +" gesture detected.";
-        });
-
-        mc.on("swiperight", function(ev) {
-            $('#NextCard').trigger( "click" );
-            //myElement.textContent = ev.type +" gesture detected.";
-        });
-
-        mc.on("tap", function(ev) {
-            $('#PausePlay').trigger( "click" );
-            //myElement.textContent = ev.type +" gesture detected.";
-        });
-
-        mc.get('pinch').set({ enable: true });
+       
 
 
 
@@ -695,17 +675,18 @@ body::-webkit-scrollbar {
 
             document.getElementById('ACard').innerHTML = "";  
             $("#ACard").append(`<div><span class="theWord">` + WordListArray[i].wordString + 
-                `</span> <br> <span class="pronouce">` + WordListArray[i].pronunciationString + `</span> <i class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
-            $("#ACard").append(`<div class="definition"><b>Định nghĩa: </b><p>` +  WordListArray[i].definition + `</p></div>`);
+                `</span> <br> <span class="pronouce">` + WordListArray[i].pronunciationString + `</span> <i style="font-size:2rem" class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i style="font-size:2rem"  class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
+            $("#ACard").append(`<div style="width: 100%;" id="cardBody"></div>`);
+            $("#cardBody").append(`<div class="definition"><b>Định nghĩa: </b><p>` +  WordListArray[i].definition + `</p></div>`);
             if (WordListArray[i].examples.length>0)
             {
                 let stringVidu="";
                 WordListArray[i].examples.forEach((item) => {stringVidu = stringVidu + `<li>`+ item + `</li>`;
                          });
-                $("#ACard").append(`<div class="examples"><b>Ví dụ:</b><ul>`+ stringVidu + `</ul></div>`);
+                $("#cardBody").append(`<div class="examples"><b>Ví dụ:</b><ul>`+ stringVidu + `</ul></div>`);
             }
             if (WordListArray[i].img!=null)
-            $("#ACard").append(`<img class="illustration"src="https://study4.com/`+ WordListArray[i].img + `">`);
+            $("#cardBody").append(`<img class="illustration"src="https://study4.com/`+ WordListArray[i].img + `">`);
 
             const myAudioUK = document.getElementById('myAudioUK');
             myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=1";
@@ -715,7 +696,29 @@ body::-webkit-scrollbar {
             const myAudioUS = document.getElementById('myAudioUS');
             myAudioUS.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i].wordString  + " &type=2";
 
+            var myElement = document.getElementById('cardBody');
 
+            // create a simple instance
+            // by default, it only adds horizontal recognizers
+            var mc = new Hammer(myElement);
+
+            // listen to events...
+            mc.on("swiperight", function(ev) {
+                $('#PreviousCard').trigger( "click" );
+                //myElement.textContent = ev.type +" gesture detected.";
+            });
+
+            mc.on("swipeleft", function(ev) {
+                $('#NextCard').trigger( "click" );
+                //myElement.textContent = ev.type +" gesture detected.";
+            });
+
+            mc.on("tap", function(ev) {
+                $('#PausePlay').trigger( "click" );
+                //myElement.textContent = ev.type +" gesture detected.";
+            });
+
+            mc.get('pinch').set({ enable: true });
             
             
             var allVolumeBtn = document.getElementById("ACard").getElementsByClassName("pronounceIcon");
