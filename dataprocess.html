@@ -417,7 +417,7 @@ body::-webkit-scrollbar {
 <script>
 
     let WordListArray = [];
-    var myTimer,myOldTimer;
+    var myTimer,myOldTimer,myTimer10;
 
     //Local Storage variables
     let StartWordID=0,
@@ -651,7 +651,8 @@ body::-webkit-scrollbar {
 
 
         function showWord(i) 
-        {          
+        {        
+            if (myTimer10!=null) window.clearTimeout(myTimer10);
             document.getElementById('ACard').innerHTML = "Empty";  
             if ((i>=0) && (i< WordListArray.length))
             {                
@@ -724,7 +725,8 @@ body::-webkit-scrollbar {
             var allVolumeBtn = document.getElementById("ACard").getElementsByClassName("pronounceIcon");
           
             allVolumeBtn[0].addEventListener('click', function(event) {
-                    myAudioUK.play();
+
+                playSoundUntilCarouselPlay() 
             });
             allVolumeBtn[1].addEventListener('click', function(event) {
                 
@@ -732,9 +734,19 @@ body::-webkit-scrollbar {
             });      
         
            }
+        }     
+
+        function playSoundUntilCarouselPlay() 
+        {
+            timer10();
         }
 
-        
+
+        timer10 = function() {
+            const myAudioUK = document.getElementById('myAudioUK');
+            myAudioUK.play();
+            myTimer10 =  setTimeout(timer10, 3000);
+        }
 
 
         function shuffle(array) {
