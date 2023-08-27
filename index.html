@@ -993,7 +993,7 @@ body::-webkit-scrollbar {
     
 
 
-    const data = ["Value1", "Value2", "Value3"]; // Example data to write
+    const aData = ["Value1", "Value2", "Value3"]; // Example data to write
 
     document.getElementById('Write_to_google').addEventListener('click', () => {
     fetch('https://script.google.com/macros/s/AKfycby2ZfCPuQ4r6TGDLNhWsuW0_qgZ0up5I1Y5or-9p5U05O_gaofuzZ2-JMlaGBkbEMIZ/exec', {
@@ -1001,11 +1001,11 @@ body::-webkit-scrollbar {
         headers: {
         'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ data }),
+        body: JSON.stringify({ aData }),
     })
         .then(response => response.json())
-        .then(data => {
-        console.log('Data written successfully:', data);
+        .then(aData => {
+        console.log('Data written successfully:', aData);
         })
         .catch(error => {
         console.error('Error:', error);
