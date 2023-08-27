@@ -26,8 +26,8 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
-        <script src="hammer.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/ggrw.js"></script> -->
+        <script type="text/javascript" src="hammer.min.js"></script>
 
 <style>
 .loader {
@@ -368,7 +368,12 @@ body::-webkit-scrollbar {
 
         <div class="classButtons">
             <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Start_Flash_Card">Cook and run</button>
-            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>
+            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>          
+        </div>  
+
+        <div class="classButtons">
+            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Load_from_google">Load from google</button>
+            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Write_to_google">Write to google</button>          
         </div>  
 
         <div class="classSummary">
@@ -987,6 +992,25 @@ body::-webkit-scrollbar {
     }
     
 
+
+    const data = ["Value1", "Value2", "Value3"]; // Example data to write
+
+    document.getElementById('Write_to_google').addEventListener('click', () => {
+    fetch('https://script.google.com/macros/s/AKfycby2ZfCPuQ4r6TGDLNhWsuW0_qgZ0up5I1Y5or-9p5U05O_gaofuzZ2-JMlaGBkbEMIZ/exec', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ data }),
+    })
+        .then(response => response.json())
+        .then(data => {
+        console.log('Data written successfully:', data);
+        })
+        .catch(error => {
+        console.error('Error:', error);
+        });
+    });
 
 </script>
 
