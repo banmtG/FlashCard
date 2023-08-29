@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+.buton {
+    font-size: 3rem;;
+}
+</style>
+
+<script>
+function Enviar(){
+
+var txt1=document.getElementById("txt1").value;
+var txt2=document.getElementById("txt2").value;
+var txt3=document.getElementById("txt3").value;
+google.script.run.doSomething(txt1,txt2,txt3);
+}
+</script>
+</head>
+
+<body>
+Prueba de Envio de informacion<br>
+<input class="buton" type="text" value="EMAIL" name="txt1" id="txt1"><br>
+<input class="buton" type="text" value="CEDULA" name="txt2" id="txt2"><br>
+<input class="buton" type="text" value="NOMBRE" name="txt3" id="txt3"><BR>
+<Button name="btn1" onClick="Enviar();">Enviar</button>
+</body>
+
+</html>

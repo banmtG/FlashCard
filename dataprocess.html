@@ -176,6 +176,8 @@ body::-webkit-scrollbar {
 }
 
 .verticalWord {
+    display: flex;
+    justify-content: space-around;
     width:15%;
     font-size: 3rem;
     background-color: white;
@@ -219,7 +221,7 @@ body::-webkit-scrollbar {
 
 #ACard .pronouce {
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: 1.7rem;
 }
 
 #ACard .definition p {
@@ -660,7 +662,7 @@ body::-webkit-scrollbar {
             let aString = `(` + FlashCardList.indexOf(i) + `/` + totalCard  +`)`;
             $('#CardIDNumber').text(i);
             $('#Paging').text(aString);
-            $('.verticalWord').text(WordListArray[i].wordString);
+            document.getElementsByClassName('verticalWord')[0].innerHTML=`<span>` + WordListArray[i].wordString + `</span> <span style="font-size:2rem">` + WordListArray[i].pronunciationString + `</span>`;
              
             let linkOptions = document.getElementById('selectLinks').options;
             
