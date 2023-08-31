@@ -1,0 +1,188 @@
+[
+    {
+        "Phonetic_Alphabet": "iː",
+        "Example": "meet",
+        "Color": "long",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=56s"
+    },
+    {
+        "Phonetic_Alphabet": "ɪ",
+        "Example": "pig",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=180s"
+    },
+    {
+        "Phonetic_Alphabet": "uː",
+        "Example": "true ",
+        "Color": "long",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=56s"
+    },
+    {
+        "Phonetic_Alphabet": "ʊ",
+        "Example": "look",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=190s"
+    },
+    {
+        "Phonetic_Alphabet": "ɜː",
+        "Example": "church",
+        "Color": "long",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=262s"
+    },
+    {
+        "Phonetic_Alphabet": "ə",
+        "Example": "america",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=300"
+    },
+    {
+        "Phonetic_Alphabet": "ɔː",
+        "Example": "naughty",
+        "Color": "long",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=487"
+    },
+    {
+        "Phonetic_Alphabet": "ɒ",
+        "Example": "what",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=534"
+    },
+    {
+        "Phonetic_Alphabet": "ɑː",
+        "Example": "fast",
+        "Color": "long",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=373"
+    },
+    {
+        "Phonetic_Alphabet": "ʌ",
+        "Example": "cup",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=426"
+    },
+    {
+        "Phonetic_Alphabet": "æ",
+        "Example": "cat",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=448"
+    },
+    {
+        "Phonetic_Alphabet": "e",
+        "Example": "friend",
+        "Color": "short",
+        "Link": "https://www.youtube.com/watch?v=C2c0zG47k3k&t=203"
+    },
+    {
+        "Phonetic_Alphabet": "ɪə",
+        "Example": "beer",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=82s"
+    },
+    {
+        "Phonetic_Alphabet": "eə",
+        "Example": "hair",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=82s"
+    },
+    {
+        "Phonetic_Alphabet": "ʊə",
+        "Example": "pure",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=82s"
+    },
+    {
+        "Phonetic_Alphabet": "eɪ",
+        "Example": "plane",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=534s"
+    },
+    {
+        "Phonetic_Alphabet": "ɔɪ",
+        "Example": "boy",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=534s"
+    },
+    {
+        "Phonetic_Alphabet": "aɪ",
+        "Example": "eye",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=534s"
+    },
+    {
+        "Phonetic_Alphabet": "əʊ",
+        "Example": "no",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=1032s"
+    },
+    {
+        "Phonetic_Alphabet": "aʊ",
+        "Example": "cow",
+        "Color": "dipthong",
+        "Link": "https://www.youtube.com/watch?v=dg2Ep3DF8VY&t=1177s"
+    },
+    {
+        "Phonetic_Alphabet": "θ",
+        "Example": "thing",
+        "Color": "unvoiced",
+        "Link": "https://www.youtube.com/watch?v=ZLIyGyClo88&t=74s"
+    },
+    {
+        "Phonetic_Alphabet": "ð",
+        "Example": "mother",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=ZLIyGyClo88&t=257s"
+    },
+    {
+        "Phonetic_Alphabet": "t",
+        "Example": "talk",
+        "Color": "unvoiced",
+        "Link": "https://www.youtube.com/watch?v=ZLIyGyClo88&t=144s"
+    },
+    {
+        "Phonetic_Alphabet": "d",
+        "Example": "do",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=ZLIyGyClo88&t=328s"
+    },
+    {
+        "Phonetic_Alphabet": "ʧ ",
+        "Example": "chair",
+        "Color": "unvoiced",
+        "Link": "https://www.youtube.com/watch?v=VNWVIfcujCU&t=299s"
+    },
+    {
+        "Phonetic_Alphabet": "ʤ ",
+        "Example": "just",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=fhDClBc6shY&t=323s"
+    },
+    {
+        "Phonetic_Alphabet": "ʃ",
+        "Example": "she",
+        "Color": "unvoiced",
+        "Link": "https://www.youtube.com/watch?v=VNWVIfcujCU&t=108s"
+    },
+    {
+        "Phonetic_Alphabet": "ʒ",
+        "Example": "visual",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=fhDClBc6shY&t=369s"
+    },
+    {
+        "Phonetic_Alphabet": "s",
+        "Example": "sit",
+        "Color": "unvoiced",
+        "Link": "https://www.youtube.com/watch?v=VNWVIfcujCU&t=62s"
+    },
+    {
+        "Phonetic_Alphabet": "z",
+        "Example": "has",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=VNWVIfcujCU&t=466s"
+    },
+    {
+        "Phonetic_Alphabet": "j",
+        "Example": "yes",
+        "Color": "voiced",
+        "Link": "https://www.youtube.com/watch?v=VNWVIfcujCU&t=362s"
+    }
+]

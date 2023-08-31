@@ -153,8 +153,14 @@ body::-webkit-scrollbar {
 .classButtons {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}
+
+.classButtons button {
+    height: 80px;  
+    width: 45%;
+    margin: 10px;
 }
 
 
@@ -303,6 +309,105 @@ body::-webkit-scrollbar {
     height: 100px !important;
 }
 
+
+
+/* ////////////////////// pronunciation CSS */
+#pronunciationSection {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    background-color:rgba(255, 255, 255, 1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;    
+
+}
+
+.buttonDiv {
+    width: 100%;
+    height: 5%; 
+    text-align: center;
+    background-color: grey;
+    border-radius: 5px;
+    border: 1px dashed grey;
+}
+
+.pronunDiv {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap; 
+    overflow: hidden;  
+}
+
+.pronunDiv .long {
+    background-color: #FF9301;
+}
+
+.pronunDiv .short {
+    background-color: #FFC978;
+}
+
+.pronunDiv .unvoiced {
+    background-color: #FCE0E9;
+}
+
+.pronunDiv .voiced {
+    background-color: #7AD9FF;
+}
+
+.pronunDiv .dipthong {
+    background-color: #ABABAA;
+}
+
+.pronunSectionColumn {
+    display: flex;
+    width: 50%;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.pronunSectionColumn a {
+    text-decoration: none;
+    text-align: center;
+    padding: 2px;
+    border: 1px dashed grey;
+    width: 50%;      
+}
+
+.pronunSectionColumn a span {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+#pronunSectionBottom {
+    margin-top:5px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    height: 100px;
+}
+
+#pronunSectionBottom a {
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    border: 1px dashed grey;
+    height: auto;
+    width: 25%;      
+}
+
+#pronunSectionBottom a span {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+
+
 /* .select2-container .select2-selection--single {
     height: 35px !important;
 }
@@ -372,15 +477,28 @@ body::-webkit-scrollbar {
         </div>
 
         <div class="classButtons">
-            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Start_Flash_Card">Cook and run</button>
-            <button style="height: 100px; width: 45%;" class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>
+            <button class="ui-button ui-widget ui-corner-all" id="Start_Flash_Card">Cook and run</button>
+            <button class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>
+            <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">Learn pronunication</button>                   
         </div>  
 
         <div class="classSummary">
 
         </div>
 
+        <div id="pronunciationSection" style="display:none">       
+            <div class="pronunDiv">
+                <div class="pronunSectionColumn" id="pronunSectionLeft"></div>
+                <div class="pronunSectionColumn" id="pronunSectionRight"></div>
+                <div id="pronunSectionBottom"></div>
+            </div>
+            <div class="buttonDiv">
+                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+            </div>
+        </div>
+
     </div>  
+    
     <div class="Card_container" id="Card_container" style="display:none">
         <div class="aCardContainer" id="aCardContainer">            
             <div id="ACard"></div>
@@ -420,6 +538,7 @@ body::-webkit-scrollbar {
 <script>
 
     let WordListArray = [];
+    let PronunciationListArray = [];
     var myTimer,myOldTimer,myTimer10;
 
     //Local Storage variables
@@ -441,6 +560,23 @@ body::-webkit-scrollbar {
             $loading.hide();
             FunctionAfterDataLoaded();
         });
+
+
+    $.getJSON('./pronunciation/pronunciation_data.json', function (json) {
+    for (var key in json) {
+        if (json.hasOwnProperty(key)) {
+            var item = json[key];
+            PronunciationListArray.push({
+                Phonetic_Alphabet: item.Phonetic_Alphabet,
+                Example: item.Example,
+                Color: item.Color,
+                Link: item.Link,
+            });           
+        }
+    }
+    });
+
+    console.log(`PronunciationListArray`, PronunciationListArray);
 
     $.getJSON('WordList.json', function (json) {
     for (var key in json) {
@@ -487,7 +623,8 @@ body::-webkit-scrollbar {
         $('#Mastered-wordList').select2({
                 width: 'resolve' ,// need to override the changed default
             });
-        $('#Option-wordList').select2({theme: "classic"});
+        $('#Option-wordList').select2({
+            theme: "classic" });
         $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
         $('#selectLinks').on('select2:select', function (e) {         
             var data = e.params.data;
@@ -499,6 +636,17 @@ body::-webkit-scrollbar {
     }
 
 // Load list of words to 3 select
+
+    function loadPronunicationDiv()
+    {
+        for (var i=0;i<12;i++)   
+        $("#pronunSectionLeft").append(`<a class="` + PronunciationListArray[i].Color + `"" href="` + PronunciationListArray[i].Link + `" data=` + PronunciationListArray[i].Phonetic_Alphabet + `>` + PronunciationListArray[i].Phonetic_Alphabet + `<br><span>` + PronunciationListArray[i].Example + `</span></a>`);
+        for (var i=20;i<PronunciationListArray.length;i++)   
+        $("#pronunSectionRight").append(`<a class="` + PronunciationListArray[i].Color + `"" href="` + PronunciationListArray[i].Link + `" data=` + PronunciationListArray[i].Phonetic_Alphabet + `>` + PronunciationListArray[i].Phonetic_Alphabet + `<br><span>` + PronunciationListArray[i].Example + `</span></a>`);
+        for (var i=12;i<20;i++)   
+        $("#pronunSectionBottom").append(`<a class="` + PronunciationListArray[i].Color + `"" href="` + PronunciationListArray[i].Link + `" data=` + PronunciationListArray[i].Phonetic_Alphabet + `>` + PronunciationListArray[i].Phonetic_Alphabet + `<br><span>` + PronunciationListArray[i].Example + `</span></a>`);
+        
+    }
 
     function load3SelectWithWords()
     {
@@ -848,6 +996,17 @@ body::-webkit-scrollbar {
             timer();      
 
         });
+
+        const btnPronuniciataion = document.getElementById('btnPronuniciataion');
+
+        btnPronuniciataion.addEventListener('click', event => {
+            $('#pronunciationSection').show();
+        });
+
+        $('.buttonDiv').on('click', function() {
+            $('#pronunciationSection').hide();
+        });
+
    
         $('#BacktoMenu').on('click', function() {
             $('.Card_container').hide();
@@ -1008,6 +1167,7 @@ body::-webkit-scrollbar {
     function FunctionAfterDataLoaded() 
     {
         load3SelectWithWords();
+        loadPronunicationDiv();
         initialiseControl();
         dealWithOnChange();
         readFromLocalStorage();    
