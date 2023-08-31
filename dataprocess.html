@@ -313,6 +313,7 @@ body::-webkit-scrollbar {
 
 /* ////////////////////// pronunciation CSS */
 #pronunciationSection {
+    padding:5px;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -326,12 +327,20 @@ body::-webkit-scrollbar {
 }
 
 .buttonDiv {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    height: 5%; 
-    text-align: center;
-    background-color: grey;
+    height: 10%;    
+    align-items: stretch;
+    justify-content: center;
+    background-color: rgb(95, 142, 231);
     border-radius: 5px;
     border: 1px dashed grey;
+}
+
+.buttonDiv i {
+    font-size: 3rem;
+    align-self: center;
 }
 
 .pronunDiv {
@@ -373,9 +382,10 @@ body::-webkit-scrollbar {
 .pronunSectionColumn a {
     text-decoration: none;
     text-align: center;
+    margin: 2px;
     padding: 2px;
     border: 1px dashed grey;
-    width: 50%;      
+    width: calc(50% - 4px);      
 }
 
 .pronunSectionColumn a span {
@@ -398,7 +408,8 @@ body::-webkit-scrollbar {
     padding: 5px;
     border: 1px dashed grey;
     height: auto;
-    width: 25%;      
+    margin: 2px;
+    width: calc(25% -  4px);      
 }
 
 #pronunSectionBottom a span {
