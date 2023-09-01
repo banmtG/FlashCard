@@ -14,5 +14,7 @@ function init() {
   .then (res => res.text())
   .then (rep => {
       console.log(rep);
+      const jsO = JSON.parse(rep.substr(47).slice(0,-2));
+      console.log(jsO);
   })
 }
