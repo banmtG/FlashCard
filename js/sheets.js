@@ -84,9 +84,10 @@ function checkUsers (name,pass)
 
 function initPOST() {  
  const myTypeValue=2;
-  const url1=`${appsScriptUrl}?type=${myTypeValue}`;
-  const formData = new FormData();
-  formData.append('key1', 'value1');  
+  //const url1=`${appsScriptUrl}?type=${myTypeValue}`;
+  const url1=appsScriptUrl;
+  // const formData = new FormData();
+  // formData.append('key1', 'value1');  
   fetch (url1 ,{
     method: 'POST',
     body: JSON.stringify(myPostDataObj)
