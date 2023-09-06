@@ -2,11 +2,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     height: 100vh;
     width: 100vw;
     border: 1px white dashed;
-    background-color: white;
+    background-color: var(--white-color);
 }
 
 #loginScreen_title_H1ID {
@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     font-size: 4rem;    
-    height: 30%;
+    height: 10%;
 }
 
 #loginScreen_DivID .loginForm {
@@ -22,14 +22,14 @@
     flex-direction: column;
     justify-content: flex-start;
     font-size: 2rem;   
-    height: 40%; 
+    height: 30%; 
 }
 
 #loginScreen_DivID .loginForm div {
     display:flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #loginScreen_DivID .loginForm div span{
