@@ -3,8 +3,8 @@
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     border: 1px white dashed;
     background-color: var(--white-color);
 }
@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     font-size: 4rem;    
-    height: 10%;
+    min-height: 100px;
 }
 
 #loginScreen_DivID .loginForm {
@@ -22,7 +22,7 @@
     flex-direction: column;
     justify-content: flex-start;
     font-size: 2rem;   
-    height: 30%; 
+    height: 50%; 
 }
 
 #loginScreen_DivID .loginForm div {

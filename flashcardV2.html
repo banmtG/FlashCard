@@ -14,9 +14,10 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-        <!-- LOCAL javaScript-->
-        <script src="hammer.min.js"></script>
-        <script type="text/javascript" src="./js/sheets.js"></script>
+        <!-- LOCAL javaScript library-->
+        <script type="text/javascript" src="./js/hammer.min.js"></script>
+        <!-- <script type="text/javascript" src="./js/sheets.js"></script> -->
+
         <!-- LOCAL css-->
         <link href="./css/base.css" rel="stylesheet">
         <link href="./css/main.css" rel="stylesheet">      
@@ -27,8 +28,8 @@
     <div id="loginScreen_DivID">
         <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
         <form class="loginForm">
-            <div><span>Username </span><textarea id="loginScreen_username_TextID"></textarea></div>
-            <div><span>Password </span><textarea id="loginScreen_password_TextID"></textarea></div>
+            <div><span>Username </span><textarea type="text" placeholder="Enter Username" id="loginScreen_username_TextID"></textarea></div>
+            <div><span>Password </span><textarea type="password" placeholder="Enter Password" id="loginScreen_password_TextID"></textarea></div>
             <button class='btn' id="loginScreen_login_BtnID">Login</button>
         </form>      
     </div>
@@ -37,6 +38,10 @@
     <div id="flashcardScree_DivID" style="display: none">Screen 3</div>
 
     
+    <!-- LOCAL javaScript functions-->
+    <script type="text/javascript" src="./js/flahsCard_mainJS.js"></script>
+    <script type="text/javascript" src="./js/loginScreen.js"></script>
+
 
 </body>
 </html>
