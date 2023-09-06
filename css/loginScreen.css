@@ -1,0 +1,53 @@
+#loginScreen_DivID {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+    width: 100vw;
+    border: 1px white dashed;
+    background-color: white;
+}
+
+#loginScreen_title_H1ID {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 4rem;    
+    height: 30%;
+}
+
+#loginScreen_DivID .loginForm {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 2rem;   
+    height: 40%; 
+}
+
+#loginScreen_DivID .loginForm div {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#loginScreen_DivID .loginForm div span{
+    margin-right: 5px;
+    width: 30%;
+}
+
+#loginScreen_DivID textarea {
+    margin-left: 5px;
+    font-size: 2rem; 
+    height: 3rem;
+}
+
+#loginScreen_allWordList_selectID {
+    height: 3rem;
+    font-size: 2rem; 
+}
+
+
+
+

@@ -1,0 +1,188 @@
+:root {
+    --theme-color: #f53e2d;
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --border-color: #EBEBEB;
+}
+
+/*  */
+* {
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6em;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    position:relative;
+}
+
+.grid {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__full-width {
+    width: 100%;
+}
+
+.grid__row {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.unselectable {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+  }
+
+.modal {
+    position: absolute;
+    top:0;
+    left:0;
+    color: var (--text-color);
+    display: none;
+}
+
+.modal__overlay {
+    display: flex;
+    position: relative;   
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    z-index:100;
+}
+
+.modal__window {
+    width: 450px;
+    height: auto;
+    margin: auto;
+    background-color: var(--white-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    z-index:101;
+}
+
+.authen{
+    display:flex;
+    padding: 3rem;
+    flex-direction: column;
+}
+
+.authen__top {
+    display:flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
+}
+
+.authen__top > a {
+    text-decoration: none;
+}
+.authen__top__LoginForm {
+    color: var(--theme-color);
+}
+
+.authen > input {
+    height: 3.8rem;
+    font-size: 1.4rem;
+    padding: 4px 10px;
+    color: var(--text-color);
+    border: 3px solid var(--border-color);
+    border-radius: 2px;
+    margin-bottom: 2.5rem;
+}
+
+.authen > input:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--theme-color);
+}
+
+.authen__policyAgreement {
+    font-size:1.35rem;
+    font-weight: 300;
+    line-height: 1.9rem;
+    text-align: center;
+}
+
+.authen__policyAgreement > a {
+
+    color: var(--theme-color);
+}
+
+.authen__action {
+    margin-top: 3rem;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.authen__action >.btn:nth-child(1) {
+    margin-right: 8px;    
+}
+
+.authen__social {
+    display: flex;
+    justify-content: center;
+    background-color: var(--border-color);
+}
+
+/* btn */
+
+.btn {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 30px;
+    font-size: 1.6rem;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 2px;
+    user-select: none;
+}
+
+.btn--primary {
+    background-color: var(--theme-color);
+    color: var(--white-color);
+}
+
+.btn--withImg {
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin: 12px 5px;
+}
+
+.btn--withImg > span {
+    padding: 3px 10px;
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.btn:hover {
+    opacity:0.9;
+}
+
+.btn--facebook {
+    color: var(--white-color);
+    background-color: #2C4579;
+}
+/* Animation7 */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
