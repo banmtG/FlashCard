@@ -1,7 +1,9 @@
 #loginScreen_DivID { 
     display: flex;
+    padding: 10px;
     align-items: center;
-    flex-direction: column;   
+    flex-direction: column;
+   
     border: 1px white dashed;
     background-color: var(--white-color);
 }
@@ -31,12 +33,13 @@
 
 #loginScreen_DivID .loginForm div span{
     margin-right: 5px;
-    width: 30%;
+    width: 100px;
 }
 
 #loginScreen_DivID input {
     margin-left: 5px;
     font-size: 2rem; 
     height: 3rem;
+    width: 150px;
 }
 

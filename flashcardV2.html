@@ -25,23 +25,24 @@
         
 </head>
 <body>
-    <div id="loginScreen_DivID">
-        <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
-        <form class="loginForm">
-            <div><span>Username </span><input type="text" value="AD" placeholder="Enter Username" id="loginScreen_username_TextID" ></div>
-            <div><span>Password </span><input type="password" value="BiTin2021" placeholder="Enter Password" id="loginScreen_password_TextID"></div>
-            <div class='btn' id="loginScreen_login_BtnID">Login</div>
-        </form>      
+    <div style="padding:30px; background-color: red;">
+        <div id="loginScreen_DivID">
+            <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
+            <form class="loginForm">
+                <div><span>Username </span><input type="text" value="AD" placeholder="Enter Username" id="loginScreen_username_TextID" ></div>
+                <div><span>Password </span><input type="password" value="BiTin2021" placeholder="Enter Password" id="loginScreen_password_TextID"></div>
+                <div class='btn' id="loginScreen_login_BtnID">Login</div>
+            </form>      
+        </div>
+
+        <div id="optionScreen_DivID" style="display: none">Screen 2
+            <span id="optionScreen_welcomeName_SpanID"></span>
+            <span id="optionScreen_Logout_SpanID">Logout</span>
+        </div>
+
+        <div id="flashcardScreen_DivID" style="display: none">Screen 3</div>
+
     </div>
-
-    <div id="optionScreen_DivID" style="display: none">Screen 2
-        <span id="optionScreen_welcomeName_SpanID"></span>
-        <span id="optionScreen_Logout_SpanID">Logout</span>
-    </div>
-
-    <div id="flashcardScree_DivID" style="display: none">Screen 3</div>
-
-    
     <!-- LOCAL javaScript functions-->
     <script type="text/javascript" src="./js/flahsCard_mainJS.js"></script>
     <script type="text/javascript" src="./js/loginScreen.js"></script>
