@@ -1,10 +1,8 @@
-#loginScreen_DivID {
+#loginScreen_DivID { 
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%;
-    width: 100%;
     border: 1px white dashed;
     background-color: var(--white-color);
 }
@@ -37,7 +35,7 @@
     width: 30%;
 }
 
-#loginScreen_DivID textarea {
+#loginScreen_DivID input {
     margin-left: 5px;
     font-size: 2rem; 
     height: 3rem;

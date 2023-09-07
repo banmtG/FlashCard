@@ -1,40 +1,18 @@
-// const sheetID=`11ToP0WQhuOOw5jqgz2kRmmGGe89pB2JsAXgqT6sAGpE`;
-// const base = ` https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`
-// const sheetName = `users`;
-// const qu = `Select *`;
-// const query = encodeURIComponent(qu);
-// const url = `${base}&sheet=${sheetName}&tq=${query}`;
-// const data = [];
+const sheetID=`11ToP0WQhuOOw5jqgz2kRmmGGe89pB2JsAXgqT6sAGpE`;
+const base = ` https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?`
+const sheetName = `users`;
+const qu = `Select *`;
+const query = encodeURIComponent(qu);
+const url = `${base}&sheet=${sheetName}&tq=${query}`;
+const data = [];
 
-const appsScriptUrl=`https://script.google.com/macros/s/AKfycbyPydOh1Au6Nq7cXFdRYM9XpmvUCpdo4YAB5dJvg8VsoNHckrjxzFiiH3M2J9NSLgby/exec?myService=checkUser&name=AD&pass=BiTin2021`;
-const btn = document.querySelector('button');
-const myInput = document.querySelector('input');
-const results = document.querySelector('.results');
+const appsScriptUrl=`https://script.google.com/macros/s/AKfycby2avKkuf8OY4LToJJDXu-Xwh7qX9sGzuwWrIDizJG1yOVVGfhWu8NVfG3eBeBlU5TKyg/exec`;
 
-
-btn.addEventListener('click', (e) => {
-
-  var myType = myInput.value;
-  url1=`https://script.google.com/macros/s/AKfycbzarzlXiPbDUvZZLG2ugKrGiiEatHIwXUJ8GOjwsiZ9yZlALTO6lsJdRXAr51uXQfRf/exec?type=${myType}`;
-  urlDev=`https://script.google.com/macros/s/AKfycbzV4cTALDDhF8B8mCZHaev021TBbjTretcEIo9pmVg/dev`;
-  console.log('click');
-  console.log(url1);
-  fetch (url1)
-  .then (res => res.json())
-  .then (data => {
-      console.log(data);
-      console.log(JSON.stringify(data));
-  });
-
-});
-
-
-
-// document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded',initPOST);
 
 var preferenceObj = {
-    'userID': 1,
-    'listID': 1,
+    'userID': 2,
+    'listID': 2,
     'firstno' : 0,
     'lastno' : 10,
     'playorder' : `asc`,
@@ -117,33 +95,31 @@ function initPOST() {
 }
 
 
-function init() {  
-  console.log("init called");
-
-  fetch (appsScriptUrl)
-  .then (res => res.text())
-  .then (rep => {
-       console.log(rep);
-      // const jsData = JSON.parse(rep.substring(47).slice(0,-2));
-      // console.log(jsData);
-      // const colz = [];
-      // jsData.table.cols.forEach((heading) => {
-      //   if (heading.label) {
-      //     const propName = heading.label.toLowerCase().replace(/\s/g,``);
-      //     colz.push(propName);
-      //     //console.log(propName);
-      //   }        
-      // });
+// function init() {  
+//   fetch (appsScriptUrl)
+//   .then (res => res.text())
+//   .then (rep => {
+//        console.log(rep);
+//       // const jsData = JSON.parse(rep.substring(47).slice(0,-2));
+//       // console.log(jsData);
+//       // const colz = [];
+//       // jsData.table.cols.forEach((heading) => {
+//       //   if (heading.label) {
+//       //     const propName = heading.label.toLowerCase().replace(/\s/g,``);
+//       //     colz.push(propName);
+//       //     //console.log(propName);
+//       //   }        
+//       // });
       
-      // jsData.table.rows.forEach((row) => {      
-      //   console.log(row);
-      //   let anItem = {};
-      //     for (var i=0;i<colz.length;i++)
-      //     {
-      //       anItem[colz[i]] = (row.c[i] != null) ? row.c[i].v : '';
-      //     }
-      //   data.push(anItem);
-      // });
-      // console.log(data);
-  })
-}
+//       // jsData.table.rows.forEach((row) => {      
+//       //   console.log(row);
+//       //   let anItem = {};
+//       //     for (var i=0;i<colz.length;i++)
+//       //     {
+//       //       anItem[colz[i]] = (row.c[i] != null) ? row.c[i].v : '';
+//       //     }
+//       //   data.push(anItem);
+//       // });
+//       // console.log(data);
+//   })
+// }

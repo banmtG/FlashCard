@@ -1,6 +1,11 @@
 let preferencesObj_GLOBAL = {};
 let loginStatus_GLOBAL = false;
-let googleAppScriptUrl_GLOBAL = 'SomeUrl/exec';
+
+let googleAppScriptUrl_GLOBAL = 'https://script.google.com/macros/s/AKfycbzoRaYfarjkNY6ILEwWdFsV3tMUFyXPRM8CGeU2iOAumfKPjX38I3gflQ2lefwHiZVNGg/exec';
+
+let userID_GLOBAL =``;
+let username_GLOBAL = '';
+let password_GLOBAL = '';
 
 // // Put the object into storage
 // localStorage.setItem('testObject', JSON.stringify(testObject));
@@ -13,18 +18,23 @@ let googleAppScriptUrl_GLOBAL = 'SomeUrl/exec';
 
 function callDoGet (queryString) {
     const url=`${googleAppScriptUrl_GLOBAL}${queryString}`;
-    fetch (url)
-    .then (res => res.text())
-    .then (rep => {
-       return rep;
+    console.log(url);    
+    return fetch (url)
+    .then (res => res.json())
+    .then (data => {
+        // console.log(data);
+        // console.log(JSON.stringify(data));
+        return data;
     })
 }
 
 function fetch_GAS_Data_ByService (myService) {      
+    console.log(myService);
     var queryString ="";
-    if (myService==='fetchUserPreferences')
-    {
-        queryString = `?myService=${mySerivce}&user=${userID_GLOBAL}&pass=${listID_GLOBAL}`;
+    if (myService === 'checkUser')
+    {        
+        queryString = `?myService=${myService}&name=${username_GLOBAL}&pass=${password_GLOBAL}`;
+        console.log(queryString);
         return callDoGet(queryString);
     }
 }
