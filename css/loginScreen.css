@@ -1,8 +1,7 @@
 #loginScreen_DivID { 
     display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: column;   
     border: 1px white dashed;
     background-color: var(--white-color);
 }
