@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
         crossorigin="anonymous"></script>
+
         <!-- Jquery select2  -->
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -22,10 +23,12 @@
         <link href="./css/base.css" rel="stylesheet">
         <link href="./css/main.css" rel="stylesheet">      
         <link href="./css/loginScreen.css" rel="stylesheet">
-        
+        <link href="./css/optionScreen.css" rel="stylesheet"> 
+        <link href="./css/select2Custom.css" rel="stylesheet">
 </head>
 <body>
-    <div style="padding:30px; background-color: red;">
+    <div class="loader" id="loadingDiv"></div>       
+    <div style="padding:5px;">
         <div id="loginScreen_DivID">
             <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
             <form class="loginForm">
@@ -35,18 +38,104 @@
             </form>      
         </div>
 
-        <div id="optionScreen_DivID" style="display: none">Screen 2
-            <span id="optionScreen_welcomeName_SpanID"></span>
-            <span id="optionScreen_Logout_SpanID">Logout</span>
+        <div id="optionScreen_DivID" style="display: none">
+            <div style="padding: 10px; display:flex; flex-direction: row; justify-content: flex-end;">
+                <span id="optionScreen_welcomeName_SpanID"></span>
+                <span style="margin-left: 10px" id="optionScreen_Logout_SpanID">Logout</span>
+            </div>
+
+            <div id="optionScreen_body_DivID">
+                <div class="classStartNumber">
+                    <span style="width: 40px; margin-right: 10px;">List: </span>
+                    <select id="optionScreen_studyList_SelectID"></select>
+                    <button style="margin-left: 10px; width : 140px">Refresh data</button>
+                </div>
+
+                                  
+                    <div class="classStartNumber">
+                        <label style="width: 40px" for="number-pattern">Start</label>
+                        <input style="margin-right: 5px; width: 60px;" type="number" name="number" pattern="[0-9]*" id="StartID" value="0"> 
+                        <select class="flexGrowSelect" style="flex-grow:1 !important" id="start-number-wordList"></select >
+                    </div>
+                    
+            
+                    <div class="classEndNumber">
+                        <label style="width: 40px" for="number-pattern">End</label>
+                        <input style="margin-right: 5px; width: 60px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
+                        <select class="flexGrowSelect" style="flex-grow:1" id="end-number-wordList"></select >
+                    </div>
+                        
+                    <div class="classMasteredList">
+                        <span id="sumWordMastered">0 mastered words (wont be shown):</span>
+                        <select class="js-example-basic-multiple js-states form-control" multiple="multiple" id="Mastered-wordList">
+                        </select>
+                    </div>
+
+                    <div class="classReviewList">
+                        <span id="sumWordReview">Favorite words:</span>
+                        <select class="js-example-basic-multiple js-states form-control" multiple="multiple" id="Review-wordList">
+                        </select>
+                    </div>
+                    
+                    <div class="classOrder">
+                        <label style="width: 100px" >Play order:</label>
+                        <select class="js-example-basic" name="FlashCard Option" id="Option-wordList">
+                            <option value="shuffle">Shuffle</option>
+                            <option value="asc">Ascending (A-Z)</option>
+                            <option value="desc">Descending (Z-A)</option>
+                            <option value="timeAsc">Date added (Asc)</option>
+                            <option value="timeDesc">Date added (Desc) (Z-A)</option>
+                        </select>
+                    </div>
+
+                    <div class="classPlaymode">
+                        <label style="width: 100px" >Play mode:</label>
+                        <select name="FlashCard Option" id="Playmode-wordList">
+                            <option value="1">Exclude mastered words</option>
+                            <option value="2">Include mastered words</option>
+                            <option value="3">Favorite words only (review)</option>
+                            <option value="4">Favorite words first (review)</option>                           
+                        </select>
+                    </div>
+            
+                    <div class="classWaitingTime">
+                        <label>Interval (ms):</label>
+                        <input style="width: 100px;"type="number" name="number" pattern="[0-9]*" id="WaitTime" value="5000">
+                    </div>
+            
+                    <div class="classButtons">
+                        <button class="ui-button ui-widget ui-corner-all" id="Cook_Run">Cook and run</button>
+                        <button class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Cont from last run</button>
+                        <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">IPA pronunication</button>                   
+                    </div>  
+            
+                    <div class="classSummary">
+            
+                    </div>
+            
+                    <div id="pronunciationSection" style="display:none">       
+                        <div class="pronunDiv">
+                            <div class="pronunSectionColumn" id="pronunSectionLeft"></div>
+                            <div class="pronunSectionColumn" id="pronunSectionRight"></div>
+                            <div id="pronunSectionBottom"></div>
+                        </div>
+                        <div class="buttonDiv">
+                            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                        </div>
+                    </div>
+            
+             
+            </div>
         </div>
 
         <div id="flashcardScreen_DivID" style="display: none">Screen 3</div>
 
     </div>
     <!-- LOCAL javaScript functions-->
+    <script type="text/javascript" src="./js/loginScreen1.js"></script>
+    <script type="text/javascript" src="./js/optionScreen1.js"></script>
     <script type="text/javascript" src="./js/flahsCard_mainJS.js"></script>
-    <script type="text/javascript" src="./js/loginScreen.js"></script>
-    <script type="text/javascript" src="./js/optionScreen.js"></script>
+
 
 
 </body>

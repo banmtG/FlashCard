@@ -13,7 +13,12 @@ $('#loginScreen_login_BtnID').on('click', function () {
         userID_GLOBAL = dataUser.UserID;
         if (userID_GLOBAL!=null) {
             $('#loginScreen_DivID').hide();
-            LoadDataforScreen2();
+            LoadDataFromServerForScreen2();
+            loginStatus_GLOBAL = true;            
+            localStorage.setItem("loginStatus_GLOBAL", `true`);
+            localStorage.setItem("username_GLOBAL", username_GLOBAL);
+            username_GLOBAL==localStorage.getItem("username_GLOBAL");
+            console.log(username_GLOBAL);
             $('#optionScreen_DivID').show();
         }
 
