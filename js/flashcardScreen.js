@@ -34,7 +34,7 @@ function showWord(theFakeI)
     $("#ACard").append(`<div><span class="theWord">` + WordListArray[i][0] + 
         `</span> <br> <span class="pronouce">` + IPA_UK + `</span> <i style="font-size:2rem" class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i style="font-size:2rem"  class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
     $("#ACard").append(`<div style="width: 100%;" id="cardBody"></div>`);
-    $("#cardBody").append(`<div class="definition"><b>Định nghĩa: </b><p>` +  WordListArray[i][1] + WordListArray[i][2] + `</p></div>`);
+    $("#cardBody").append(`<div class="definition"><b>Định nghĩa: </b><p style="margin-top:0.3rem">` +  WordListArray[i][1] + `\n` + WordListArray[i][2] + `</p></div>`);
 
     $("#cardBody").append(`<div class="examples"><b>Ví dụ:</b><ul>`+ WordListArray[i][3] + `</ul></div>`);
 
@@ -90,13 +90,27 @@ function showWord(theFakeI)
   
     allVolumeBtn[0].addEventListener('click', function(event) {
 
-        playSoundUntilCarouselPlay() 
-    });
+        playSoundUntilCarouselPlay();
+
+        if ($('#PauseBtn').is(':visible'))
+        {
+            window.clearTimeout(myTimer);
+            console.log(`myTimer.cleared`,myTimer);
+            $(".PlayButton").toggle();
+        }     
+        });
 
     allVolumeBtn[1].addEventListener('click', function(event) {
         
         myAudioUS.play();
-    });      
+
+        if ($('#PauseBtn').is(':visible'))
+        {
+            window.clearTimeout(myTimer);
+            console.log(`myTimer.cleared`,myTimer);
+            $(".PlayButton").toggle();
+        }     
+        });      
 
    }
 }     
