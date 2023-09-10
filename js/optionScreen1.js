@@ -9,7 +9,10 @@ let StartWordID=0,
     FlashCardOption='shuffle',
     Playmode=`1`,
     WaitTime=6000,
-    wordCountingI=0;
+    wordCountingI=0,
+    WordListArray=[];
+
+var myTimer,myOldTimer,myTimer10;
 
 
 function LoadScreen2()
@@ -19,7 +22,9 @@ function LoadScreen2()
     localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
     userName = localStorage.getItem("userName");
     console.log(`localListArray`, localListArray);
-    console.log(`localUserPres`, localUserPres);
+   // console.log(`localUserPres`, localUserPres);
+
+    
 
     const selectStudyListDiv = document.querySelector(`#optionScreen_studyList_SelectID`);
         //console.log(selectStudyList);
@@ -37,6 +42,9 @@ function LoadScreen2()
     } else {selectStudyListDiv.value = 1};
 
     selectedListID=selectStudyListDiv.value;
+
+ 
+    console.log(`WordListArray`, WordListArray);
 
     initialiseControl();
     load4Selects();
@@ -91,8 +99,10 @@ function loadVariableFromLocalUserPres(listID) {
             FlashCardList=localUserPres[i][6].split(`,`).map(function(item) {
                 return parseInt(item, 10);
             });
+            console.log(`FlashCardList`, FlashCardList);
             // console.log(FlashCardList);
             FlashCardOption=localUserPres[i][7];
+          
             WaitTime=localUserPres[i][8];
             Playmode=localUserPres[i][9];        
         }
@@ -304,7 +314,7 @@ function PreparePlaylist()
 
     var rawList=[];
 
-    const pos = findListPosition(localListArray,selectedListID);
+    let pos = findListPosition(localListArray,selectedListID);
     
     for (var jj=parseInt(StartWordID);jj<=parseInt(EndWordID);jj++)
     {              
@@ -313,7 +323,7 @@ function PreparePlaylist()
         rawList.push(tempArray);
     }
 
-    console.log(rawList);    
+   // console.log(rawList);    
 
     var numList=[];    
     
@@ -331,7 +341,7 @@ function PreparePlaylist()
         FlashCardList = numList.filter((item) => !MasteredWordList.includes(item));      
     }
 
-    console.log(FlashCardList); 
+   // console.log(FlashCardList); 
 
 
     if (Playmode=='2') {
@@ -345,28 +355,44 @@ function PreparePlaylist()
     }
 
     let aTemplist=[];
+ //   console.log(`FavouriteWordList`,FavouriteWordList);
 
     if (Playmode=='4') {
+        console.log(`FlashCardList b`,FlashCardList);
+        FlashCardList = numList.filter((item) => !MasteredWordList.includes(item));      
         //console.log(" Play mode 4");
-        FlashCardList = numList.filter((item) => !FavouriteWordList.includes(item));
+        console.log(`numList a`,FlashCardList);
+      
+        console.log(`FlashCardList a`,FlashCardList);
         let min =  numList[0];
         let max =  numList[numList.length-1];
         //console.log(`min`,min);
-        //console.log(`max`,max);       
-
+        //console.log(`max`,max);      
+        console.log(`FavouriteWordList`,FavouriteWordList);
         for (var i=0;i<FavouriteWordList.length;i++){
-            if (FavouriteWordList[i]>=min && FavouriteWordList[i]<=max)
+            console.log(FlashCardList.indexOf(FavouriteWordList[i]));
+            if (FlashCardList.indexOf(FavouriteWordList[i])>-1)
             {
               //  console.log(`FavouriteWordList[i]`,FavouriteWordList[i]);
                 aTemplist.push(FavouriteWordList[i]);
             }
         }
+
+        FlashCardList = FlashCardList.filter((item) => !FavouriteWordList.includes(item));
+
+        // for (var i=0;i<FavouriteWordList.length;i++){
+        //     if (FavouriteWordList[i]>=min && FavouriteWordList[i]<=max)
+        //     {
+        //       //  console.log(`FavouriteWordList[i]`,FavouriteWordList[i]);
+        //         aTemplist.push(FavouriteWordList[i]);
+        //     }
+        // }
       
         console.log(aTemplist);
     }
     
 
-    console.log(`FlashCardList before Order`, FlashCardList);  
+  //  console.log(`FlashCardList before Order`, FlashCardList);  
       
   
   
@@ -399,13 +425,24 @@ function PreparePlaylist()
     }
 
     if (FlashCardOption=="desc") {
+      //  console.log(`FlashCardList desc`);
+    //    console.log(`FlashCardList before desc`,FlashCardList);
         FlashCardList = sortList(FlashCardList,rawList,'desc');
+   //     console.log(`FlashCardList after desc`,FlashCardList);
         if (aTemplist.length>0) {
+           // console.log(`atemp desc`);
             aTemplist = sortList(aTemplist,rawList,'desc');
         }
     }
 
+  //  console.log(`aTemplist`,aTemplist);
+    console.log(`FlashCardList`,FlashCardList);
+
     FlashCardList = aTemplist.concat(FlashCardList);
+
+   
+    console.log(`pos`, pos);
+    WordListArray = localListArray[pos].listData.slice();   
 
     console.log(`FlashCardList AFTER Order`, FlashCardList);   
     savePresToLocalStorage(); 
@@ -414,14 +451,17 @@ function PreparePlaylist()
 function sortList(array,rawList,mode) {
     let aAlphabeticArray = [];
     for (var i=0;i<array.length;i++)
-    {   
-        //console.log(array[i]);
-       // console.log(rawList[array[i]-1][1]);
-        aAlphabeticArray.push(rawList[array[i]-1][1].toString().toLowerCase());    
-
+    {
+        for (var j=0;j<rawList.length;j++)
+        if (array[i]==rawList[j][0])
+        {
+            aAlphabeticArray.push(rawList[j][1].toString().toLowerCase());
+            break;
+        }
     }
+
     if (mode=='asc') {
-        //console.log(`in asc mode`);
+      //  console.log(`in asc mode`);
         aAlphabeticArray = aAlphabeticArray.sort();
     }
 
@@ -430,36 +470,39 @@ function sortList(array,rawList,mode) {
         aAlphabeticArray = aAlphabeticArray.sort().reverse();
     }
 
-    console.log(`aAlphabeticArray`, aAlphabeticArray);
+   // console.log(`aAlphabeticArray`, aAlphabeticArray);
+    
     let resultArray = [];
+
     for (var i=0;i<aAlphabeticArray.length;i++)
     {
+      //  console.log(`aAlphabeticArray i`,aAlphabeticArray[i]);
         for (var j=0;j<rawList.length;j++)
-        if (aAlphabeticArray[i]==rawList[j][1].toString().toLowerCase())
         {
-            resultArray.push(rawList[j][0]);
+          // console.log(`rawList j 1`,rawList[j][1].toString().toLowerCase());
+            if (aAlphabeticArray[i]==rawList[j][1].toString().toLowerCase())
+                {
+                    resultArray.push(rawList[j][0]);
+                 //   console.log('= nhau');
+                    break;
+                }
         }
     }
     //console.log(`resultArray`, resultArray);
-
     return resultArray;
-
 }
 
 const btnStart = document.getElementById('Cook_Run');
 
-        btnStart.addEventListener('click', event => {
-        
-            PreparePlaylist();
-        // if (localStorage.getItem('MasteredWordList') !== null) 
-        //     MasteredWordList = localStorage.getItem("MasteredWordList").split(',');
-        // // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
-        //     wordCountingI=0;
-        //     prepareList(FlashCardOption);
-        //     $('.Card_container').show();
-        //     window.clearTimeout(myTimer);
-        //     PlaytoPause ();
-        //     timer();
+        btnStart.addEventListener('click', event => {        
+            PreparePlaylist();       
+        // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
+            wordCountingI=0;  
+            $('#optionScreen_DivID').hide();
+            $('#flashcardScreen_DivID').show();
+            window.clearTimeout(myTimer);
+            PlaytoPause ();
+            timer();
         });
 
 // Playmode options 

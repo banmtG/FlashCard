@@ -25,9 +25,14 @@
         <link href="./css/loginScreen.css" rel="stylesheet">
         <link href="./css/optionScreen.css" rel="stylesheet"> 
         <link href="./css/select2Custom.css" rel="stylesheet">
+        <link href="./css/flahscardScreen.css" rel="stylesheet">
 </head>
 <body>
-    <div class="loader" id="loadingDiv"></div>       
+    <div class="loader" id="loadingDiv"></div> 
+    <audio id="myAudioUK"></audio>
+    <audio id="myAudioUS"></audio>
+    
+    
     <div style="padding:5px;">
         <div id="loginScreen_DivID">
             <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
@@ -127,15 +132,49 @@
              
             </div>
         </div>
-
-        <div id="flashcardScreen_DivID" style="display: none">Screen 3</div>
+        
+        <div id="flashcardScreen_DivID" style="display: none">Screen 3
+            <div class="Card_container" id="Card_container">
+                <div class="aCardContainer" id="aCardContainer">            
+                    <div id="ACard"></div>
+                    <div class="verticalWord">Abandon</div>
+                </div>
+                <div id="CardLink">
+                    <select id="selectLinks" style="width:100%;" >
+                        <option value="https://www.bing.com/images/search?q=theWord">Bing Images</option>
+                        <option value="https://www.cartoonstock.com/search-s2?type=images&keyword=theWord">Cartoon Stock</option>
+                        <option value="https://giphy.com/search/theWord">Giphy</option>
+                        <option value="https://youglish.com/pronounce/theWord">Youglish</option>
+                        <option value="https://www.vocabulary.com/dictionary/theWord">Vocabulary.com</option>
+                        <option value="https://dictionary.cambridge.org/dictionary/english/theWord">Cambridge Dictionary</option>
+                        <option value="https://vdict.com/theWord,1,0,0.html">Vdict.com</option>
+                    </select>
+                </div>
+                <div id="CardControl">
+                    <div class="ControlRow">
+                    <div id="PreviousCard"><i class="fa fa-step-backward" aria-hidden="true"></i></div>    
+                    <div id="PausePlay"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
+                        <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
+                    <div id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
+                </div>
+                    <div class="ControlRow">               
+                        <div style="display:flex; flex-direction: column;">
+                            <span style="font-size: 1.5rem" id="CardIDNumber"></span>
+                            <span style="font-size: 1.5rem" id="Paging"></span>
+                        </div>
+                        <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
+                        <div id="AddToMasteredList"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>           
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- LOCAL javaScript functions-->
     <script type="text/javascript" src="./js/loginScreen1.js"></script>
     <script type="text/javascript" src="./js/optionScreen1.js"></script>
     <script type="text/javascript" src="./js/flahsCard_mainJS.js"></script>
-
+    <script type="text/javascript" src="./js/flashcardScreen.js"></script>
 
 
 </body>
