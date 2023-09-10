@@ -22,7 +22,7 @@ function LoadScreen2()
     localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
     userName = localStorage.getItem("userName");
     console.log(`localListArray`, localListArray);
-   // console.log(`localUserPres`, localUserPres);
+    console.log(`localUserPres`, localUserPres);
 
     
 
@@ -44,7 +44,7 @@ function LoadScreen2()
     selectedListID=selectStudyListDiv.value;
 
  
-    console.log(`WordListArray`, WordListArray);
+    // console.log(`WordListArray`, WordListArray);
 
     initialiseControl();
     load4Selects();
@@ -78,6 +78,12 @@ function initialiseControl()
     //     $("#selectLinks").val("");
     // });
    
+    if (localStorage.getItem('wordCountingI') !== null) {
+        wordCountingI = localStorage.getItem("wordCountingI");              
+        console.log(`wordCountingI Loaded =`,wordCountingI);
+    } else {         
+        console.log(`wordCountingI not Exist`);
+    }
 
 }
 
@@ -441,8 +447,7 @@ function PreparePlaylist()
     FlashCardList = aTemplist.concat(FlashCardList);
 
    
-    console.log(`pos`, pos);
-    WordListArray = localListArray[pos].listData.slice();   
+   
 
     console.log(`FlashCardList AFTER Order`, FlashCardList);   
     savePresToLocalStorage(); 
@@ -492,10 +497,16 @@ function sortList(array,rawList,mode) {
     return resultArray;
 }
 
-const btnStart = document.getElementById('Cook_Run');
+const btnCook_Run = document.getElementById('Cook_Run');
 
-        btnStart.addEventListener('click', event => {        
-            PreparePlaylist();       
+btnCook_Run.addEventListener('click', event => {        
+            PreparePlaylist();   
+
+            let pos = findListPosition(localListArray,selectedListID);       
+            console.log(`pos`, pos);
+            WordListArray = localListArray[pos].listData.slice();  
+            console.log(WordListArray);    
+
         // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
             wordCountingI=0;  
             $('#optionScreen_DivID').hide();
@@ -504,6 +515,25 @@ const btnStart = document.getElementById('Cook_Run');
             PlaytoPause ();
             timer();
         });
+
+const btnContinue_Flash_Card = document.getElementById('Continue_Flash_Card');
+
+btnContinue_Flash_Card.addEventListener('click', event => {        
+  
+// if (wordCountingI<StartNumber) wordCountingI=StartNumber;
+    
+    let pos = findListPosition(localListArray,selectedListID);
+    console.log(`pos`, pos);
+    WordListArray = localListArray[pos].listData.slice();  
+    console.log(WordListArray); 
+
+    wordCountingI--;
+    $('#optionScreen_DivID').hide();
+    $('#flashcardScreen_DivID').show();
+    window.clearTimeout(myTimer);
+    PlaytoPause ();
+    timer();      
+});
 
 // Playmode options 
 // 1. Exclude mastered words

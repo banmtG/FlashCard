@@ -12,7 +12,7 @@ function showWord(theFakeI)
     //console.log(IPA_UK);
 
     let totalCard = FlashCardList.length;
-    let position = FlashCardList.indexOf(i) + 2;
+    let position = wordCountingI+1;
     let aString = `(` + position + `/` + totalCard  +`)`;
     $('#CardIDNumber').text(theFakeI);
     $('#Paging').text(aString);
@@ -131,6 +131,7 @@ timer10 = function() {
 timer = function() {
 
     localStorage.setItem("wordCountingI", wordCountingI);
+    
     if (wordCountingI<FlashCardList.length) {                
         showWord(FlashCardList[wordCountingI]);
         wordCountingI++; 
@@ -142,6 +143,7 @@ timer = function() {
     }
     myOldTimer = myTimer;
     myTimer =  setTimeout(timer, WaitTime);
+
 }
 
 function PlaytoPause () {
@@ -169,6 +171,7 @@ $('#BacktoMenu').on('click', function() {
     $('#flashcardScreen_DivID').hide();
     $('#optionScreen_DivID').show();
     window.clearTimeout(myTimer);
+    window.clearTimeout(myTimer10);
     console.log(`myTimer.cleared`,myTimer);
 });
 
@@ -288,7 +291,6 @@ $('#AddToMasteredList').on('click', function() {
     if ($('#PauseBtn').is(':visible'))
     {
         window.clearTimeout(myTimer);
-      //  console.log(`myTimer.cleared`,myTimer);
         $(".PlayButton").toggle();
     }           
     //wordCountingI=wordCountingI-1;
@@ -299,10 +301,7 @@ $('#AddToMasteredList').on('click', function() {
     console.log(`MasteredWordList`, MasteredWordList);
     $("#Mastered-wordList").val(MasteredWordList).trigger("change.select2");
 
-    
-
     FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
-
     savePresToLocalStorage();    
     showWord(FlashCardList[realPosition+1]);
     console.log(`myTimer.cleared`,myTimer);

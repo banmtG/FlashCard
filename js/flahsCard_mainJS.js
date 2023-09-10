@@ -57,7 +57,7 @@ var $loading = $('#loadingDiv').hide();
 $(document).ready()
 {
     loginStatus_GLOBAL = localStorage.getItem("loginStatus_GLOBAL");
-    if (loginStatus_GLOBAL===`true`)
+    if (loginStatus_GLOBAL===`truea`)
     {
         LoadScreen2();
         $('#loginScreen_DivID').hide();
