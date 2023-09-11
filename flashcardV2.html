@@ -61,14 +61,14 @@
 
                                   
                     <div class="classStartNumber">
-                        <label style="width: 50px" for="number-pattern">Start</label>
+                        <label style="width: 50px" for="number-pattern">Start: </label>
                         <input style="margin-right: 5px; width: 60px;" type="number" name="number" pattern="[0-9]*" id="StartID" value="0"> 
                         <select class="flexGrowSelect" style="flex-grow:1 !important" id="start-number-wordList"></select >
                     </div>
                     
             
                     <div class="classEndNumber">
-                        <label style="width: 50px" for="number-pattern">End</label>
+                        <label style="width: 50px" for="number-pattern">End: </label>
                         <input style="margin-right: 5px; width: 60px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
                         <select class="flexGrowSelect" style="flex-grow:1" id="end-number-wordList"></select >
                     </div>
@@ -86,7 +86,7 @@
                     </div>
                     
                     <div class="classOrder">
-                        <label style="width: 110px" >Play order:</label>
+                        <label style="width: 60px" >Order: </label>
                         <select class="js-example-basic" name="FlashCard Option" id="Option-wordList">
                             <option value="shuffle">Shuffle</option>
                             <option value="asc">Ascending (A-Z)</option>
@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="classPlaymode">
-                        <label style="width: 110px" >Play mode:</label>
+                        <label style="width: 60px" >Mode: </label>
                         <select name="FlashCard Option" id="Playmode-wordList">
                             <option value="1">Exclude mastered words</option>
                             <option value="2">Include mastered words</option>
@@ -114,8 +114,9 @@
             
                     <div class="classButtons">
                         <button class="ui-button ui-widget ui-corner-all" id="Cook_Run">Cook and run</button>
-                        <button class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Cont from last run</button>
+                        <button class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>
                         <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">IPA pronunication</button>                   
+                        <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">Save Pref</button>                   
                     </div>  
             
                     <div class="classSummary">
@@ -156,15 +157,23 @@
                 </div>
                 <div id="CardControl">
                     <div class="ControlRow">
-                    <div id="PreviousCard"><i class="fa fa-step-backward" aria-hidden="true"></i></div>    
-                    <div id="PausePlay"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
-                        <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
-                    <div id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
+                        <!-- Hidden div -->
+                        <div id="PreviousCard" style="display:none" class="small"><i class="fa fa-step-backward" aria-hidden="true"></i></div>    
+                        <div id="NextCard" style="display:none"  class="small"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
+                        <!-- //// -->
+                        <div class="small btnLink" data-value="https://www.google.com/search?q=theWord"><img src="./img/google.png" alt="sample"></div>
+                        <div class="small btnLink" data-value="https://vdict.com/theWord,1,0,0.html"><img src="./img/vdict.png" alt="sample"></div>
+                        <div class="small btnLink" data-value="https://youglish.com/pronounce/theWord"><img src="./img/youglish.png" alt="sample"></div>
+                        <div class="small btnLink" data-value="https://www.vocabulary.com/dictionary/theWord"><img src="./img/vocabulary.png" alt="sample"></div>
+                        <div class="small btnLink" data-value="https://dictionary.cambridge.org/dictionary/english/theWord"><img src="./img/cambridge.png" alt="sample"></div>
+                        
                     </div>
                     <div class="ControlRow">   
-                        <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
-                        <div id="AddToMasteredList"><i class="fas fa-filter"></i></div>
-                        <div id="AddToFavouriteList"><i class="fa-solid fa-bookmark"></i></div>
+                        <div id="BacktoMenu" class="extended"><i class="fa-solid fa-arrow-right-to-bracket fa-rotate-180"></i></div>
+                        <div id="PausePlay" class="small"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
+                            <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
+                        <div id="AddToMasteredList" class="small"><i class="fa-solid fa-filter-circle-xmark"></i></div>
+                        <div id="AddToFavouriteList" class="small"><i class="fa-solid fa-star"></i></div>
                     </div>           
                 </div>
             </div>

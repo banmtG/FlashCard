@@ -1,3 +1,5 @@
+let linkBtn = document.getElementsByClassName('btnLink');
+
 function showWord(theFakeI) 
 {        
     let i=theFakeI-1;
@@ -13,11 +15,11 @@ function showWord(theFakeI)
 
     let totalCard = FlashCardList.length;
     let position = wordCountingI+1;
-    let aString = `(` + position + `/` + totalCard  +`)`;
+    let aString = position + ` / ` + totalCard ;
    
     document.getElementsByClassName('verticalWord')[0].innerHTML=`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span> <span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span> </div><div class="paging">  
-    <span style="font-size: 1.2rem" id="CardIDNumber"></span>
-    <span style="font-size: 1.2rem" id="Paging"></span>
+    <span style="font-size: 0.9rem" id="CardIDNumber"></span>
+    <span style="font-size: 0.6rem" id="Paging"></span>
     </div>`;
      
     $('#CardIDNumber').text(theFakeI);
@@ -34,6 +36,7 @@ function showWord(theFakeI)
     $('#AddToMasteredList').css('color','white'); 
 
     $('#Paging').text(aString);
+
     let linkOptions = document.getElementById('selectLinks').options;
     
     //console.log(linkOptions);
@@ -41,6 +44,18 @@ function showWord(theFakeI)
     Array.from(linkOptions).forEach(function (element) {
         element.title = element.value.replaceAll("theWord", WordListArray[i][0]);
     });
+
+       
+    //console.log(linkOptions);
+
+    // console.log(linkBtn[1].getAttribute('data-value'));
+    // linkBtn[1].setAttribute(`data-title`,linkBtn[1].getAttribute('data-value').replaceAll("theWord", WordListArray[i][0])); 
+    // console.log(linkBtn[1].getAttribute('data-title'));
+    Array.from(linkBtn).forEach(function (element) {
+        element.setAttribute(`data-title`,element.getAttribute('data-value').replaceAll("theWord", WordListArray[i][0]));
+        // element.title = element.data-value.replaceAll("theWord", WordListArray[i][0]);
+    });
+
 
     // linkOptions.forEach((item) => {
     //     item.value = item.value.replaceAll("theWord", WordListArray[i].wordString);
@@ -354,3 +369,13 @@ $('#AddToFavouriteList').on('click', function() {
     savePresToLocalStorage();        
     // console.log(`myTimer.cleared`,myTimer);
 });
+
+
+
+Array.from(linkBtn).forEach(function (element) {
+    element.addEventListener('click', (e)=> {
+        var data = element.getAttribute('data-title');        
+        window.open(data);          
+    })   
+});
+

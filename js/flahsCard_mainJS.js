@@ -90,9 +90,6 @@ $(document).ready()
 //     {
 //         console.log('something wrong');
 //     }
-    
-
-    
 
 }
 

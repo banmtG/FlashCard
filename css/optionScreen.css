@@ -92,3 +92,17 @@
     background-color: greenyellow;
 }
 
+
+.classButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
+}
+
+.classButtons button {
+    height: 50px;  
+    width: 40%;
+    margin: 10px;
+}
+

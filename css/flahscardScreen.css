@@ -19,23 +19,27 @@
 .verticalWord {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     width:15%;
-    
+    border-right: 1px dotted #e5e5e5 ;
 }
 
 .verticalWord .verticalPart {
     height: 90%;
-    font-size: 3rem;
+    display: flex;
+    font-size: 2.5rem;
     background-color: white;
     color: black;
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
     text-orientation: mixed;
     transform:scale(-1);
-    line-height: 4.5rem;
+    line-height: 2rem;
     font-weight: 700;
     text-align: center;
     overflow: hidden;
+    align-items: center;
+    justify-content: space-evenly
+  
 }
 
 .verticalWord .paging {
@@ -45,6 +49,7 @@
     justify-content: center;
     text-align: center;
     padding:5px;
+    font-size: 1rem;
     line-height:1.5rem; 
     transform:scale(1);
     writing-mode: horizontal-tb;
@@ -59,14 +64,12 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    padding: 10px;
-    border: 1px black dashed;
+    padding: 10px;  
     background-color:rgba(255, 255, 255, 1);
 }
 
 #CardLink {
     font-size: 1.5rem;
-    height: 5%;
     display: flex;   
     flex-direction: row;
     background-color:rgba(255, 255, 255, 1);
@@ -145,16 +148,24 @@
     padding: 5px;
 }
 
-.ControlRow div {
+.ControlRow .small {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 20%;
     border: 1px white dashed;
- 
-
 }
+
+.ControlRow .extended {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 39.9%;
+    border: 1px white dashed;
+}
+
 
 .Card_container {
     width: 100%;
@@ -272,4 +283,8 @@
 #pronunSectionBottom a span {
     font-size: 1rem;
     font-style: italic;
+}
+
+.btnLink img {
+    width:50%;
 }

@@ -78,11 +78,9 @@ function initialiseControl()
     $('#start-number-wordList').select2({theme: "classic"});
     $('#Mastered-wordList').select2({theme: "Mas"});
     $('#Review-wordList').select2({theme: "Fav"});
-    $('#Option-wordList').select2(
-        {theme: "classic"});
-    $('#Playmode-wordList').select2(
-        {theme: "classic"});
-    $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
+    $('#Option-wordList').select2({theme: "NonClassic"});
+    $('#Playmode-wordList').select2({theme: "NonClassic"});
+    $('#selectLinks').select2({theme: "Mas", minimumResultsForSearch: -1});
     $('#selectLinks').on('select2:select', function (e) {         
         var data = e.params.data;
         window.open(data.element.title);
@@ -485,7 +483,7 @@ function sortList(array,rawList,mode) {
         if (array[i]==rawList[j][0])
         {
             aAlphabeticArray.push(rawList[j][1].toString().toLowerCase());
-            break;
+           // break;
         }
     }
 
@@ -513,7 +511,7 @@ function sortList(array,rawList,mode) {
                 {
                     resultArray.push(rawList[j][0]);
                  //   console.log('= nhau');
-                    break;
+                   // break;
                 }
         }
     }
