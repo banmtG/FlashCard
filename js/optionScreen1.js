@@ -1,8 +1,8 @@
 let localUserPres,localListArray;
-let userName, selectedListID;
+let userName, selectedListID=1;
 
-let StartWordID=0,
-    EndWordID=50,
+let StartWordID=1,
+    EndWordID=1,
     MasteredWordList=[],
     FavouriteWordList=[],
     FlashCardList=[],
@@ -28,29 +28,42 @@ function LoadScreen2()
 
     const selectStudyListDiv = document.querySelector(`#optionScreen_studyList_SelectID`);
         //console.log(selectStudyList);
+    selectStudyListDiv.innerHTML="";
     localListArray.forEach(function(item) {
         var option1 = document.createElement('option');
         option1.text = item.listDescription;
         option1.value = item.listID;
         selectStudyListDiv.add(option1);          
-    });
+    });   
 
     if (JSON.parse(localStorage.getItem("selectedListID")))
     {
-        selectStudyListDiv.value=localStorage.getItem("selectedListID");
+        let aListArray = [];
+        for (var i=0;i<localListArray.length;i++)
+            aListArray.push(localListArray[i].listID);
+        
+        const tempLocalListArray = localStorage.getItem("selectedListID");
+        if (aListArray.indexOf(tempLocalListArray)>-1)
+        {
+            selectStudyListDiv.value=tempLocalListArray;           
+        } else 
+        { selectStudyListDiv.value = aListArray[0];}
+        //console.log(`selectedListID`, selectedListID);
+    } else {
+        selectStudyListDiv.value = 1;
        
-    } else {selectStudyListDiv.value = 1};
-
+        //console.log(`vao set 1`);
+    };
+    //selectedListID=selectStudyListDiv.value;
     selectedListID=selectStudyListDiv.value;
-
  
-    // console.log(`WordListArray`, WordListArray);
+    console.log(`selectedListID`, selectedListID);
 
     initialiseControl();
     load4Selects();
     dealWithOnChange();
 
-    $('#optionScreen_welcomeName_SpanID').text(`Welcome ${userName}!`);
+    $('#optionScreen_welcomeName_SpanID').html(`Welcome <b style="color: var(--blue-color)">${userName}!</b>`);
 
     loadVariableFromLocalUserPres(selectedListID);
     loadOtherControls();
@@ -60,7 +73,7 @@ function LoadScreen2()
 
 function initialiseControl() 
 {
-    $('#optionScreen_studyList_SelectID').select2({theme: "classic"});
+    $('#optionScreen_studyList_SelectID').select2({theme: "SelectList"});
     $('#end-number-wordList').select2({theme: "classic"});
     $('#start-number-wordList').select2({theme: "classic"});
     $('#Mastered-wordList').select2({theme: "Mas"});
@@ -82,12 +95,18 @@ function initialiseControl()
 }
 
 function loadVariableFromLocalUserPres(listID) {
+    console.log(localUserPres);
+    console.log(listID);
     for (var i=0;i<localUserPres.length;i++)
     {
+        console.log(localUserPres[i][1]);
+        console.log(localUserPres[i][1]);
         if (listID == localUserPres[i][1])
-        {
+        {            
             StartWordID=localUserPres[i][4];
+            console.log(`Start`, localUserPres[i][4]);
             EndWordID=localUserPres[i][5];
+            console.log(`End`, localUserPres[i][5]);
             MasteredWordList=localUserPres[i][2].split(`,`).map(function(item) {
                 return parseInt(item, 10);
             });
@@ -114,7 +133,7 @@ function loadVariableFromLocalUserPres(listID) {
 function findListPosition(listArr,listID) {
     for (var i=0;i<listArr.length;i++)
     {               
-        if (listID == listArr[i].listID) {            
+        if (parseInt(listID) == listArr[i].listID) {            
             return i;
         }
     }
@@ -142,6 +161,11 @@ function load4Selects() {
     listMastered.innerHTML="";
     listReview.innerHTML="";
     let pos = findListPosition(localListArray,selectedListID);
+    console.log(selectedListID);
+    // console.log(pos);
+    // console.log(localListArray);
+    // console.log(localListArray[pos]);
+    // console.log(localListArray[pos].listData);
     localListArray[pos].listData.forEach(function(item){
        var option1 = document.createElement('option');
        option1.text = item[0];
@@ -186,7 +210,7 @@ function dealWithOnChange()
 {
         $("#optionScreen_studyList_SelectID" ).on('change', function() {           
             selectedListID = $(this).val();
-            console.log(ListID_GLOBAL);
+            //console.log(ListID_GLOBAL);
             load4Selects();
             loadVariableFromLocalUserPres(selectedListID);
             loadOtherControls();
@@ -499,30 +523,40 @@ function sortList(array,rawList,mode) {
 
 const btnCook_Run = document.getElementById('Cook_Run');
 
-btnCook_Run.addEventListener('click', event => {        
-            PreparePlaylist();   
+btnCook_Run.addEventListener('click', event => {       
+   
+    PreparePlaylist();   
+    if (FlashCardList.length>0)
+    {
+        let pos = findListPosition(localListArray,selectedListID);       
+        console.log(localListArray);
+        console.log(selectedListID);
+        console.log(`pos`, pos);
+        WordListArray = localListArray[pos].listData.slice();  
+        console.log(WordListArray);    
 
-            let pos = findListPosition(localListArray,selectedListID);       
-            console.log(`pos`, pos);
-            WordListArray = localListArray[pos].listData.slice();  
-            console.log(WordListArray);    
-
-        // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
-            wordCountingI=0;  
-            $('#optionScreen_DivID').hide();
-            $('#flashcardScreen_DivID').show();
-            window.clearTimeout(myTimer);
-            PlaytoPause ();
-            timer();
-        });
+    // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
+        wordCountingI=0;  
+        $('#optionScreen_DivID').hide();
+        $('#flashcardScreen_DivID').show();
+        window.clearTimeout(myTimer);
+        PlaytoPause ();
+        timer();
+    } else 
+        { alert(`No word to show`); }
+});
 
 const btnContinue_Flash_Card = document.getElementById('Continue_Flash_Card');
 
 btnContinue_Flash_Card.addEventListener('click', event => {        
-  
+   
+    if (FlashCardList.length>0)
+    {
 // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
     
     let pos = findListPosition(localListArray,selectedListID);
+    console.log(localListArray);
+    console.log(selectedListID);
     console.log(`pos`, pos);
     WordListArray = localListArray[pos].listData.slice();  
     console.log(WordListArray); 
@@ -532,7 +566,9 @@ btnContinue_Flash_Card.addEventListener('click', event => {
     $('#flashcardScreen_DivID').show();
     window.clearTimeout(myTimer);
     PlaytoPause ();
-    timer();      
+    timer();    
+    } else 
+        { alert(`No word to show`); }
 });
 
 // Playmode options 
@@ -570,3 +606,13 @@ $('.buttonDiv').on('click', function() {
     $("#pronunSectionBottom").empty();
     $('#pronunciationSection').hide();
 });
+
+const btnLogout = document.getElementById('optionScreen_Logout_SpanID');
+
+btnLogout.addEventListener('click', event => {  
+    localStorage.setItem("loginStatus_GLOBAL", `false`); 
+    $('#loginScreen_DivID').show();
+    $('#optionScreen_DivID').hide();
+});
+
+

@@ -1,4 +1,4 @@
-$('#loginScreen_login_BtnID').on('click', function () {
+$('#loginScreen_login_BtnID').click(function(){
     // ES2015+ approach: Promises with then()
     username_GLOBAL = document.querySelector('#loginScreen_username_TextID').value;
     password_GLOBAL = document.querySelector('#loginScreen_password_TextID').value;   
@@ -14,7 +14,8 @@ $('#loginScreen_login_BtnID').on('click', function () {
             console.log('welcome 1');         
 
             userName = data.UserName;
-            console.log(userName);         
+            console.log(userName);        
+            console.log(data);          
               
             localListArray = data.listArray.slice();
             localUserPres = data.userPres.slice();
@@ -22,6 +23,10 @@ $('#loginScreen_login_BtnID').on('click', function () {
             localStorage.setItem("localListArray", JSON.stringify(localListArray));
             localStorage.setItem("localUserPres", JSON.stringify(localUserPres));
             localStorage.setItem("loginStatus_GLOBAL", `true`);
+            localListArray=JSON.parse(localStorage.getItem("localListArray"));
+            localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
+            console.log(`localListArray`, localListArray);
+            console.log(`localUserPres`, localUserPres);
             LoadScreen2();
             $('#loginScreen_DivID').hide();
             $('#optionScreen_DivID').show();

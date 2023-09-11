@@ -1,17 +1,9 @@
-let preferencesObj_GLOBAL;
 let loginStatus_GLOBAL = `false`;
 
 let googleAppScriptUrl_GLOBAL = 'https://script.google.com/macros/s/AKfycbzaqNULv1rjxrKWRLBzxSs9L09NSrCooY_8ilfpQl_8hgtnAwM4h_wITm7TLKW07Xny/exec';
 
-let userID_GLOBAL =``;
 let username_GLOBAL = '';
 let password_GLOBAL = '';
-let studyListArray_GLOBAL = [];
-let aSavedWordListArray_GLOBAL;
-let wordListArray_GLOBAL = [];
-let ListID_GLOBAL = '1';
-let aPreObj_GLOBAL = {};
-
 
 function callDoGet (queryString) {
     const url=`${googleAppScriptUrl_GLOBAL}${queryString}`;

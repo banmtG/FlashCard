@@ -38,24 +38,25 @@
     <div style="padding:5px;">
         <div id="loginScreen_DivID">
             <h1 id="loginScreen_title_H1ID">Flash Card V2</h1>
-            <form class="loginForm">
+            <div class="loginForm">
                 <div><span>Username </span><input type="text" value="AD" placeholder="Enter Username" id="loginScreen_username_TextID" ></div>
                 <div><span>Password </span><input type="password" value="BiTin2021" placeholder="Enter Password" id="loginScreen_password_TextID"></div>
-                <div class='btn' id="loginScreen_login_BtnID">Login</div>
-            </form>      
+                <button class='btn' id="loginScreen_login_BtnID">Login</button>
+            </div>      
         </div>
 
         <div id="optionScreen_DivID" style="display: none">
-            <div style="padding: 10px; display:flex; flex-direction: row; justify-content: flex-end;">
+            <div style="padding: 5px; display:flex; flex-direction: row; justify-content: flex-end;">
+                <span style="margin-right: auto; color: var(--green-color)"><b>Flash Card V2</b></span>
                 <span id="optionScreen_welcomeName_SpanID"></span>
-                <span style="margin-left: 10px" id="optionScreen_Logout_SpanID">Logout</span>
+                <a style="text-decoration: underline; margin-left: 10px" id="optionScreen_Logout_SpanID">Logout</a>
             </div>
 
             <div id="optionScreen_body_DivID">
                 <div class="classStartNumber">
                     <span style="width: 40px; margin-right: 10px;">List: </span>
                     <select id="optionScreen_studyList_SelectID"></select>
-                    <button style="margin-left: 10px; width : 140px">Refresh data</button>
+                    <button style="margin-left: 5px; width : 80px">Refresh</button>
                 </div>
 
                                   
@@ -136,7 +137,7 @@
             </div>
         </div>
         
-        <div id="flashcardScreen_DivID" style="display: none">Screen 3
+        <div id="flashcardScreen_DivID" style="display: none">
             <div class="Card_container" id="Card_container">
                 <div class="aCardContainer" id="aCardContainer">            
                     <div class="verticalWord"></div>  
