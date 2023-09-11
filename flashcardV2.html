@@ -26,6 +26,8 @@
         <link href="./css/optionScreen.css" rel="stylesheet"> 
         <link href="./css/select2Custom.css" rel="stylesheet">
         <link href="./css/flahscardScreen.css" rel="stylesheet">
+        <link href="./css/pronunciationScreen.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="loader" id="loadingDiv"></div> 
@@ -58,14 +60,14 @@
 
                                   
                     <div class="classStartNumber">
-                        <label style="width: 40px" for="number-pattern">Start</label>
+                        <label style="width: 50px" for="number-pattern">Start</label>
                         <input style="margin-right: 5px; width: 60px;" type="number" name="number" pattern="[0-9]*" id="StartID" value="0"> 
                         <select class="flexGrowSelect" style="flex-grow:1 !important" id="start-number-wordList"></select >
                     </div>
                     
             
                     <div class="classEndNumber">
-                        <label style="width: 40px" for="number-pattern">End</label>
+                        <label style="width: 50px" for="number-pattern">End</label>
                         <input style="margin-right: 5px; width: 60px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
                         <select class="flexGrowSelect" style="flex-grow:1" id="end-number-wordList"></select >
                     </div>
@@ -83,7 +85,7 @@
                     </div>
                     
                     <div class="classOrder">
-                        <label style="width: 100px" >Play order:</label>
+                        <label style="width: 110px" >Play order:</label>
                         <select class="js-example-basic" name="FlashCard Option" id="Option-wordList">
                             <option value="shuffle">Shuffle</option>
                             <option value="asc">Ascending (A-Z)</option>
@@ -94,12 +96,13 @@
                     </div>
 
                     <div class="classPlaymode">
-                        <label style="width: 100px" >Play mode:</label>
+                        <label style="width: 110px" >Play mode:</label>
                         <select name="FlashCard Option" id="Playmode-wordList">
                             <option value="1">Exclude mastered words</option>
                             <option value="2">Include mastered words</option>
                             <option value="3">Favorite words only (review)</option>
-                            <option value="4">Favorite words first (review)</option>                           
+                            <option value="4">Favorite words in front</option>  
+                            <option value="5">Mastered words only (review)</option>                           
                         </select>
                     </div>
             
@@ -118,7 +121,7 @@
             
                     </div>
             
-                    <div id="pronunciationSection" style="display:none">       
+                    <div id="pronunciationSection" style="display:none">     
                         <div class="pronunDiv">
                             <div class="pronunSectionColumn" id="pronunSectionLeft"></div>
                             <div class="pronunSectionColumn" id="pronunSectionRight"></div>
@@ -136,8 +139,8 @@
         <div id="flashcardScreen_DivID" style="display: none">Screen 3
             <div class="Card_container" id="Card_container">
                 <div class="aCardContainer" id="aCardContainer">            
-                    <div id="ACard"></div>
-                    <div class="verticalWord">Abandon</div>
+                    <div class="verticalWord"></div>  
+                    <div id="ACard"></div>                    
                 </div>
                 <div id="CardLink">
                     <select id="selectLinks" style="width:100%;" >
@@ -156,14 +159,11 @@
                     <div id="PausePlay"><i class="PlayButton fa fa-play" id="PlayBtn" aria-hidden="true" style="display: none"></i>
                         <i class="PlayButton fa fa-pause" id="PauseBtn" aria-hidden="true"></i></div>
                     <div id="NextCard"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
-                </div>
-                    <div class="ControlRow">               
-                        <div style="display:flex; flex-direction: column;">
-                            <span style="font-size: 1.5rem" id="CardIDNumber"></span>
-                            <span style="font-size: 1.5rem" id="Paging"></span>
-                        </div>
+                    </div>
+                    <div class="ControlRow">   
                         <div id="BacktoMenu"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
-                        <div id="AddToMasteredList"><i class="fa fa-times" aria-hidden="true"></i></div>
+                        <div id="AddToMasteredList"><i class="fas fa-filter"></i></div>
+                        <div id="AddToFavouriteList"><i class="fa-solid fa-bookmark"></i></div>
                     </div>           
                 </div>
             </div>
@@ -175,7 +175,7 @@
     <script type="text/javascript" src="./js/optionScreen1.js"></script>
     <script type="text/javascript" src="./js/flahsCard_mainJS.js"></script>
     <script type="text/javascript" src="./js/flashcardScreen.js"></script>
-
+    <script type="text/javascript" src="./js/pronunciationScreen.js"></script>
 
 </body>
 </html>

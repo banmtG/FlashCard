@@ -84,7 +84,7 @@
 
 .select2-container--classic {
     flex-grow:1; 
-    max-width: 70%;
+    max-width: calc(100% - 110px);
 }
 
 .classReviewList .select2-container--default .select2-results__option--selected {

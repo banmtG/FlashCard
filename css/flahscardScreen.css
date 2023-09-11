@@ -18,8 +18,14 @@
 
 .verticalWord {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: flex-start;
     width:15%;
+    
+}
+
+.verticalWord .verticalPart {
+    height: 90%;
     font-size: 3rem;
     background-color: white;
     color: black;
@@ -30,6 +36,20 @@
     font-weight: 700;
     text-align: center;
     overflow: hidden;
+}
+
+.verticalWord .paging {
+    height: 10%;
+    display:flex; 
+    flex-direction: column; 
+    justify-content: center;
+    text-align: center;
+    padding:5px;
+    line-height:1.5rem; 
+    transform:scale(1);
+    writing-mode: horizontal-tb;
+    font-weight: 300;
+    background-color: white;
 }
 
 
@@ -58,12 +78,14 @@
 
 #ACard .theWord {
     font-weight: 700;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-bottom:5px;
 }
 
-#ACard .pronouce {
+#ACard .pronounce {
     font-weight: 300;
-    font-size: 1.7rem;
+    font-size: 2rem;
 }
 
 #ACard .definition p {
@@ -99,7 +121,7 @@
 }
 
 #ACard img {
-    max-height: 30% !important;
+    width: 100% !important;
 }
 
 #CardControl {
@@ -128,7 +150,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 33%;
+    width: 20%;
     border: 1px white dashed;
  
 

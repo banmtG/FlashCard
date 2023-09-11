@@ -9,7 +9,7 @@ let StartWordID=0,
     FlashCardOption='shuffle',
     Playmode=`1`,
     WaitTime=6000,
-    wordCountingI=0,
+    wordCountingI,
     WordListArray=[];
 
 var myTimer,myOldTimer,myTimer10;
@@ -69,22 +69,16 @@ function initialiseControl()
         {theme: "classic"});
     $('#Playmode-wordList').select2(
         {theme: "classic"});
-    // $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
-    // $('#selectLinks').on('select2:select', function (e) {         
-    //     var data = e.params.data;
-    //     window.open(data.element.title);
-    //   // console.log(data.element);
-    // //   console.log(data.element.title);
-    //     $("#selectLinks").val("");
-    // });
-   
-    if (localStorage.getItem('wordCountingI') !== null) {
-        wordCountingI = localStorage.getItem("wordCountingI");              
-        console.log(`wordCountingI Loaded =`,wordCountingI);
-    } else {         
-        console.log(`wordCountingI not Exist`);
-    }
+    $('#selectLinks').select2({theme: "classic", minimumResultsForSearch: -1});
+    $('#selectLinks').on('select2:select', function (e) {         
+        var data = e.params.data;
+        window.open(data.element.title);
+      // console.log(data.element);
+    //   console.log(data.element.title);
+        $("#selectLinks").val("");
+    });
 
+    
 }
 
 function loadVariableFromLocalUserPres(listID) {
@@ -110,7 +104,9 @@ function loadVariableFromLocalUserPres(listID) {
             FlashCardOption=localUserPres[i][7];
           
             WaitTime=localUserPres[i][8];
-            Playmode=localUserPres[i][9];        
+            Playmode=localUserPres[i][9];      
+            wordCountingI=localUserPres[i][10]; 
+            console.log(wordCountingI);
         }
     }
 }
@@ -285,8 +281,7 @@ function savePresToLocalStorage() {
     localUserPres[pos][7]=FlashCardOption;
     localUserPres[pos][8]=WaitTime;
     localUserPres[pos][9]=Playmode;
-
-
+    localUserPres[pos][10]=wordCountingI;
    // console.log(localUserPres);  
     localStorage.setItem("localUserPres", JSON.stringify(localUserPres));
 
@@ -358,6 +353,11 @@ function PreparePlaylist()
     if (Playmode=='3') {
         //console.log(" Play mode 3");
         FlashCardList = FavouriteWordList.slice();
+    }
+
+    if (Playmode=='5') {
+        //console.log(" Play mode 3");
+        FlashCardList = MasteredWordList.slice();
     }
 
     let aTemplist=[];
@@ -526,8 +526,8 @@ btnContinue_Flash_Card.addEventListener('click', event => {
     console.log(`pos`, pos);
     WordListArray = localListArray[pos].listData.slice();  
     console.log(WordListArray); 
-
-    wordCountingI--;
+    console.log(`wordCountingI`, wordCountingI); 
+    //wordCountingI;
     $('#optionScreen_DivID').hide();
     $('#flashcardScreen_DivID').show();
     window.clearTimeout(myTimer);
@@ -556,3 +556,17 @@ btnContinue_Flash_Card.addEventListener('click', event => {
      //     `userPres`: 2DData
 //     }
 // }
+
+const btnPronuniciataion = document.getElementById('btnPronuniciataion');
+
+btnPronuniciataion.addEventListener('click', event => {    
+    loadPronunicationDiv();
+    $('#pronunciationSection').show();
+});
+
+$('.buttonDiv').on('click', function() {
+    $("#pronunSectionLeft").empty();
+    $("#pronunSectionRight").empty();
+    $("#pronunSectionBottom").empty();
+    $('#pronunciationSection').hide();
+});

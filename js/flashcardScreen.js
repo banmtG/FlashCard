@@ -14,10 +14,26 @@ function showWord(theFakeI)
     let totalCard = FlashCardList.length;
     let position = wordCountingI+1;
     let aString = `(` + position + `/` + totalCard  +`)`;
-    $('#CardIDNumber').text(theFakeI);
-    $('#Paging').text(aString);
-    document.getElementsByClassName('verticalWord')[0].innerHTML=`<span>` + WordListArray[i][0] + `</span> <span style="font-size:2rem">` + IPA_UK + `</span>`;
+   
+    document.getElementsByClassName('verticalWord')[0].innerHTML=`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span> <span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span> </div><div class="paging">  
+    <span style="font-size: 1.2rem" id="CardIDNumber"></span>
+    <span style="font-size: 1.2rem" id="Paging"></span>
+    </div>`;
      
+    $('#CardIDNumber').text(theFakeI);
+
+    if (FavouriteWordList.indexOf(parseInt($('#CardIDNumber').text()))>-1) {
+        $('#AddToFavouriteList').css('color','greenyellow');
+    } else 
+    $('#AddToFavouriteList').css('color','white');
+
+
+    if (MasteredWordList.indexOf(parseInt($('#CardIDNumber').text()))>-1) {
+        $('#AddToMasteredList').css('color','red');
+    } else 
+    $('#AddToMasteredList').css('color','white'); 
+
+    $('#Paging').text(aString);
     let linkOptions = document.getElementById('selectLinks').options;
     
     //console.log(linkOptions);
@@ -31,8 +47,8 @@ function showWord(theFakeI)
     // });
 
     document.getElementById('ACard').innerHTML = "";  
-    $("#ACard").append(`<div><span class="theWord">` + WordListArray[i][0] + 
-        `</span> <br> <span class="pronouce">` + IPA_UK + `</span> <i style="font-size:2rem" class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i style="font-size:2rem"  class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
+    $("#ACard").append(`<div><div class="theWord">` + WordListArray[i][0] + 
+        `</div><span class="pronounce">` + IPA_UK + `</span> <i style="font-size:2rem" class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i style="font-size:2rem"  class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
     $("#ACard").append(`<div style="width: 100%;" id="cardBody"></div>`);
     $("#cardBody").append(`<div class="definition"><b>Định nghĩa: </b><p style="margin-top:0.3rem">` +  WordListArray[i][1] + `\n` + WordListArray[i][2] + `</p></div>`);
 
@@ -130,8 +146,9 @@ timer10 = function() {
 
 timer = function() {
 
-    localStorage.setItem("wordCountingI", wordCountingI);
-    
+    savePresToLocalStorage();
+    console.log(localUserPres);
+
     if (wordCountingI<FlashCardList.length) {                
         showWord(FlashCardList[wordCountingI]);
         wordCountingI++; 
@@ -155,16 +172,6 @@ function PlaytoPause () {
         $('#PauseBtn').show();
     }
 }
-
-const btnPronuniciataion = document.getElementById('btnPronuniciataion');
-
-btnPronuniciataion.addEventListener('click', event => {
-    $('#pronunciationSection').show();
-});
-
-$('.buttonDiv').on('click', function() {
-    $('#pronunciationSection').hide();
-});
 
 
 $('#BacktoMenu').on('click', function() {
@@ -288,21 +295,62 @@ $('#PausePlay').on('click', function() {
 
 $('#AddToMasteredList').on('click', function() {
    
-    if ($('#PauseBtn').is(':visible'))
-    {
-        window.clearTimeout(myTimer);
-        $(".PlayButton").toggle();
-    }           
+    // if ($('#PauseBtn').is(':visible'))
+    // {
+    //     window.clearTimeout(myTimer);
+    //     $(".PlayButton").toggle();
+    // }           
+
     //wordCountingI=wordCountingI-1;
-   // console.log(`MasteredWordList`, MasteredWordList);
-    var realPosition = FlashCardList.indexOf($('#CardIDNumber').text());
-   // console.log(`realPosition`, realPosition);
-    MasteredWordList.push(FlashCardList[realPosition]);
-    console.log(`MasteredWordList`, MasteredWordList);
+    // console.log(`MasteredWordList`, MasteredWordList);
+    var realPosition = FlashCardList.indexOf(parseInt($('#CardIDNumber').text()));
+    // console.log(`realPosition`, realPosition);
+    // console.log(`FlashCardList[realPosition]`, FlashCardList[realPosition]);
+  
+    const index = MasteredWordList.indexOf(parseInt($('#CardIDNumber').text()));
+
+    if (index > -1) { 
+      MasteredWordList.splice(index, 1); 
+      $('#AddToMasteredList').css('color','white');
+    } else
+    { 
+        $('#AddToMasteredList').css('color','red');
+        MasteredWordList.push(FlashCardList[realPosition]);
+    }
+    // console.log(`MasteredWordList`, MasteredWordList);
+
     $("#Mastered-wordList").val(MasteredWordList).trigger("change.select2");
 
-    FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
+    // FlashCardList.splice(FlashCardList.indexOf(FlashCardList[realPosition]), 1);
     savePresToLocalStorage();    
-    showWord(FlashCardList[realPosition+1]);
-    console.log(`myTimer.cleared`,myTimer);
+    //showWord(FlashCardList[realPosition]);
+    // console.log(`myTimer.cleared`,myTimer);
+});
+
+$('#AddToFavouriteList').on('click', function() {
+   
+    // if ($('#PauseBtn').is(':visible'))
+    // {
+    //     window.clearTimeout(myTimer);
+    //     $(".PlayButton").toggle();
+    // }           
+    //wordCountingI=wordCountingI-1;
+    // console.log(`FavouriteWordList`, FavouriteWordList);
+    var realPosition = FlashCardList.indexOf(parseInt($('#CardIDNumber').text()));
+
+    const index = FavouriteWordList.indexOf(parseInt($('#CardIDNumber').text()));
+
+    if (index > -1) { 
+        FavouriteWordList.splice(index, 1); 
+      $('#AddToFavouriteList').css('color','white');
+    } else
+    { 
+        $('#AddToFavouriteList').css('color','greenyellow');
+        FavouriteWordList.push(FlashCardList[realPosition]);
+    }
+    // console.log(`FavouriteWordList`, FavouriteWordList);
+    $("#Review-wordList").val(FavouriteWordList).trigger("change.select2");
+   
+    savePresToLocalStorage();        
+    // console.log(`myTimer.cleared`,myTimer);
 });
