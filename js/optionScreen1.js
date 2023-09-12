@@ -83,7 +83,7 @@ function initialiseControl()
     $('#selectLinks').select2({theme: "Mas", minimumResultsForSearch: -1});
     $('#selectLinks').on('select2:select', function (e) {         
         var data = e.params.data;
-        window.open(data.element.title);
+        window.open(data.element.title,`${data.element.getAttribute('data-tab')}`);
       // console.log(data.element);
     //   console.log(data.element.title);
         $("#selectLinks").val("");
@@ -105,15 +105,15 @@ function loadVariableFromLocalUserPres(listID) {
             console.log(`Start`, localUserPres[i][4]);
             EndWordID=localUserPres[i][5];
             console.log(`End`, localUserPres[i][5]);
-            MasteredWordList=localUserPres[i][2].split(`,`).map(function(item) {
+            MasteredWordList=localUserPres[i][2].toString().split(`,`).map(function(item) {
                 return parseInt(item, 10);
             });
             console.log(`MasteredWordList`, MasteredWordList);
-            FavouriteWordList=localUserPres[i][3].split(`,`).map(function(item) {
+            FavouriteWordList=localUserPres[i][3].toString().split(`,`).map(function(item) {
                 return parseInt(item, 10);
             });
             // console.log(FavouriteWordList);
-            FlashCardList=localUserPres[i][6].split(`,`).map(function(item) {
+            FlashCardList=localUserPres[i][6].toString().split(`,`).map(function(item) {
                 return parseInt(item, 10);
             });
             console.log(`FlashCardList`, FlashCardList);
@@ -609,8 +609,37 @@ const btnLogout = document.getElementById('optionScreen_Logout_SpanID');
 
 btnLogout.addEventListener('click', event => {  
     localStorage.setItem("loginStatus_GLOBAL", `false`); 
+    savePrefsToServer();
     $('#loginScreen_DivID').show();
     $('#optionScreen_DivID').hide();
 });
 
+const btnSavePref = document.getElementById('btnSavePref');
+
+btnSavePref.addEventListener('click', event => {  
+    localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
+    //console.log(`localUserPres`, localUserPres);
+    savePrefsToServer();
+      
+});
+
+
+function savePrefsToServer()
+{  
+    let myPostDataObj = {
+        'myservice': 'upDatePreference',
+        'preferenceArray': localUserPres  
+      }  
+    $loading.show();
+    fetch (googleAppScriptUrl_GLOBAL ,{
+        method: 'POST',
+        body: JSON.stringify(myPostDataObj)
+      })
+      .then (res => res.text())
+      .then (data => {
+          console.log(data);
+          $loading.hide();
+      });
+
+}
 

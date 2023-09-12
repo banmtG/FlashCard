@@ -64,7 +64,7 @@ var preferenceObj = {
 
 function checkUsers (name,pass)
 {
-  myService
+ // myService
   const url1=`${appsScriptUrl}?service=${myService}`;
   fetch (url1)
   .then (res => res.text())

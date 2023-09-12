@@ -116,7 +116,7 @@
                         <button class="ui-button ui-widget ui-corner-all" id="Cook_Run">Cook and run</button>
                         <button class="ui-button ui-widget ui-corner-all" id="Continue_Flash_Card">Continue from last run</button>
                         <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">IPA pronunication</button>                   
-                        <button class="ui-button ui-widget ui-corner-all" id="btnPronuniciataion">Save Pref</button>                   
+                        <button class="ui-button ui-widget ui-corner-all" id="btnSavePref">Save Prefs</button>                   
                     </div>  
             
                     <div class="classSummary">
@@ -146,13 +146,13 @@
                 </div>
                 <div id="CardLink">
                     <select id="selectLinks" style="width:100%;" >
-                        <option value="https://www.bing.com/images/search?q=theWord">Bing Images</option>
-                        <option value="https://www.cartoonstock.com/search-s2?type=images&keyword=theWord">Cartoon Stock</option>
-                        <option value="https://giphy.com/search/theWord">Giphy</option>
-                        <option value="https://youglish.com/pronounce/theWord">Youglish</option>
-                        <option value="https://www.vocabulary.com/dictionary/theWord">Vocabulary.com</option>
-                        <option value="https://dictionary.cambridge.org/dictionary/english/theWord">Cambridge Dictionary</option>
-                        <option value="https://vdict.com/theWord,1,0,0.html">Vdict.com</option>
+                        <option data-tab="B" value="https://www.bing.com/images/search?q=theWord">Bing Images</option>
+                        <option data-tab="Cartoon" value="https://www.cartoonstock.com/search-s2?type=images&keyword=theWord">Cartoon Stock</option>
+                        <option data-tab="Giphy" value="https://giphy.com/search/theWord">Giphy</option>
+                        <option data-tab="Y" value="https://youglish.com/pronounce/theWord">Youglish</option>
+                        <option data-tab="V" value="https://www.vocabulary.com/dictionary/theWord">Vocabulary.com</option>
+                        <option data-tab="C" value="https://dictionary.cambridge.org/dictionary/english/theWord">Cambridge Dictionary</option>
+                        <option data-tab="Vd" value="https://vdict.com/theWord,1,0,0.html">Vdict.com</option>
                     </select>
                 </div>
                 <div id="CardControl">
@@ -161,11 +161,11 @@
                         <div id="PreviousCard" style="display:none" class="small"><i class="fa fa-step-backward" aria-hidden="true"></i></div>    
                         <div id="NextCard" style="display:none"  class="small"><i class="fa fa-step-forward" aria-hidden="true"></i></div>
                         <!-- //// -->
-                        <div class="small btnLink" data-value="https://www.google.com/search?q=theWord"><img src="./img/google.png" alt="sample"></div>
-                        <div class="small btnLink" data-value="https://vdict.com/theWord,1,0,0.html"><img src="./img/vdict.png" alt="sample"></div>
-                        <div class="small btnLink" data-value="https://youglish.com/pronounce/theWord"><img src="./img/youglish.png" alt="sample"></div>
-                        <div class="small btnLink" data-value="https://www.vocabulary.com/dictionary/theWord"><img src="./img/vocabulary.png" alt="sample"></div>
-                        <div class="small btnLink" data-value="https://dictionary.cambridge.org/dictionary/english/theWord"><img src="./img/cambridge.png" alt="sample"></div>
+                        <div class="small btnLink" data-tab="G" data-value="https://www.google.com/search?q=theWord"><img src="./img/google.png" alt="sample"></div>
+                        <div class="small btnLink" data-tab="Vd" data-value="https://vdict.com/theWord,1,0,0.html"><img src="./img/vdict.png" alt="sample"></div>
+                        <div class="small btnLink" data-tab="Y" data-value="https://youglish.com/pronounce/theWord"><img src="./img/youglish.png" alt="sample"></div>
+                        <div class="small btnLink" data-tab="V" data-value="https://www.vocabulary.com/dictionary/theWord"><img src="./img/vocabulary.png" alt="sample"></div>
+                        <div class="small btnLink" data-tab="C" data-value="https://dictionary.cambridge.org/dictionary/english/theWord"><img src="./img/cambridge.png" alt="sample"></div>
                         
                     </div>
                     <div class="ControlRow">   

@@ -80,7 +80,7 @@
 
 .select2-selection--multiple {
     overflow: hidden !important; 
-    height: 50px !important;
+    height: 30px !important;
 }
 
 .select2-container--classic {

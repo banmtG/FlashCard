@@ -65,9 +65,9 @@ function showWord(theFakeI)
     $("#ACard").append(`<div><div class="theWord">` + WordListArray[i][0] + 
         `</div><span class="pronounce">` + IPA_UK + `</span> <i style="font-size:2rem" class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> UK <i style="font-size:2rem"  class="pronounceIcon fa fa-volume-up" aria-hidden="true"></i> US </div>`);
     $("#ACard").append(`<div style="width: 100%;" id="cardBody"></div>`);
-    $("#cardBody").append(`<div class="definition"><b>Định nghĩa: </b><p style="margin-top:0.3rem">` +  WordListArray[i][1] + `\n` + WordListArray[i][2] + `</p></div>`);
+    $("#cardBody").append(`<div class="definition"><p style="margin-top:0.3rem">` +  WordListArray[i][1] + `</p><p class="DefinitionVN">` + WordListArray[i][2] + `</p></div>`);
 
-    $("#cardBody").append(`<div class="examples"><b>Ví dụ:</b><ul>`+ WordListArray[i][3] + `</ul></div>`);
+    $("#cardBody").append(`<div class="examples"><ul>`+ WordListArray[i][3] + `</ul></div>`);
 
     if (WordListArray[i][4]!=null)
     $("#cardBody").append(`<img class="illustration"src="`+ WordListArray[i][4] + `">`);
@@ -375,7 +375,7 @@ $('#AddToFavouriteList').on('click', function() {
 Array.from(linkBtn).forEach(function (element) {
     element.addEventListener('click', (e)=> {
         var data = element.getAttribute('data-title');        
-        window.open(data);          
+        window.open(data,`${element.getAttribute('data-tab')}`);
     })   
 });
 

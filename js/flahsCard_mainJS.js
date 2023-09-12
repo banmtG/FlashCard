@@ -1,6 +1,6 @@
 let loginStatus_GLOBAL = `false`;
 
-let googleAppScriptUrl_GLOBAL = 'https://script.google.com/macros/s/AKfycbzaqNULv1rjxrKWRLBzxSs9L09NSrCooY_8ilfpQl_8hgtnAwM4h_wITm7TLKW07Xny/exec';
+let googleAppScriptUrl_GLOBAL = 'https://script.google.com/macros/s/AKfycbyw0gvAqZV5Tkc48sCaCSSmLUyZLG0q_dJ5ikfCwp_cM0mf2nO_5gHfjsHmoR6U6TKMjA/exec';
 
 let username_GLOBAL = '';
 let password_GLOBAL = '';
