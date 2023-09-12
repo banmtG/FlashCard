@@ -643,3 +643,22 @@ function savePrefsToServer()
 
 }
 
+
+function refreshData()
+{  
+    let myPostDataObj = {
+        'myservice': 'upDatePreference',
+        'preferenceArray': localUserPres  
+      }  
+    $loading.show();
+    fetch (googleAppScriptUrl_GLOBAL ,{
+        method: 'POST',
+        body: JSON.stringify(myPostDataObj)
+      })
+      .then (res => res.text())
+      .then (data => {
+          console.log(data);
+          $loading.hide();
+      });
+}
+
