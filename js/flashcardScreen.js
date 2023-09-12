@@ -80,8 +80,17 @@ function showWord(theFakeI)
         myAudioUK.src=`https://dictionary.cambridge.org/media/english/uk_pron` + WordListArray[i][7];
     }
 
-    myAudioUK.play();
+    var playPromise = myAudioUK.play();
 
+    if (playPromise !== undefined) {
+        playPromise.then(function() {
+            myAudioUK.play();
+        }).catch(function(error) {
+            myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=1";
+            myAudioUK.play();
+        });
+    }
+    
     const myAudioUS = document.getElementById('myAudioUS');
 
     if (WordListArray[i][8]=="") {

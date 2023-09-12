@@ -78,8 +78,8 @@ function initialiseControl()
     $('#start-number-wordList').select2({theme: "classic"});
     $('#Mastered-wordList').select2({theme: "Mas"});
     $('#Review-wordList').select2({theme: "Fav"});
-    $('#Option-wordList').select2({theme: "NonClassic"});
-    $('#Playmode-wordList').select2({theme: "NonClassic"});
+    $('#Option-wordList').select2({theme: "NonClassic", minimumResultsForSearch: -1});
+    $('#Playmode-wordList').select2({theme: "NonClassic", minimumResultsForSearch: -1});
     $('#selectLinks').select2({theme: "Mas", minimumResultsForSearch: -1});
     $('#selectLinks').on('select2:select', function (e) {         
         var data = e.params.data;
@@ -216,7 +216,13 @@ function dealWithOnChange()
        });
 
         $("#StartID" ).on('change', function() { 
-            $("#start-number-wordList" ).val(this.value).trigger('change');
+            let aValue=this.value;
+            if (aValue<1||aValue=="") aValue=1;
+            let pos = findListPosition(localListArray,selectedListID);  
+            let Max = localListArray[pos].listData.length;
+            if (aValue>Max) aValue=Max;
+
+            $("#start-number-wordList" ).val(aValue).trigger('change');
             StartWordID =  $("#start-number-wordList").val();
            
         });
@@ -227,8 +233,15 @@ function dealWithOnChange()
             savePresToLocalStorage();           
         });
   
-        $("#EndID" ).on('change', function() {    
-           $("#end-number-wordList" ).val(this.value).trigger('change');
+        $("#EndID" ).on('change', function() {  
+            let aValue=this.value;
+            if (aValue<1||aValue=="") aValue=1;
+            let pos = findListPosition(localListArray,selectedListID);  
+            let Max = localListArray[pos].listData.length;
+            if (aValue>Max) aValue=Max;
+            
+
+           $("#end-number-wordList" ).val(aValue).trigger('change');
            EndWordID = $("#end-number-wordList").val();
        });
 
@@ -610,6 +623,7 @@ const btnLogout = document.getElementById('optionScreen_Logout_SpanID');
 btnLogout.addEventListener('click', event => {  
     localStorage.setItem("loginStatus_GLOBAL", `false`); 
     savePrefsToServer();
+
     $('#loginScreen_DivID').show();
     $('#optionScreen_DivID').hide();
 });
@@ -620,7 +634,7 @@ btnSavePref.addEventListener('click', event => {
     localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
     //console.log(`localUserPres`, localUserPres);
     savePrefsToServer();
-      
+    alert('Preferences have been saved to server!');      
 });
 
 
@@ -644,21 +658,59 @@ function savePrefsToServer()
 }
 
 
+const btnRefreshData = document.getElementById('optionScreen_refreshData');
+
+btnRefreshData.addEventListener('click', event => {  
+    refreshData();
+      
+});
+
 function refreshData()
 {  
-    let myPostDataObj = {
-        'myservice': 'upDatePreference',
-        'preferenceArray': localUserPres  
-      }  
-    $loading.show();
-    fetch (googleAppScriptUrl_GLOBAL ,{
-        method: 'POST',
-        body: JSON.stringify(myPostDataObj)
-      })
-      .then (res => res.text())
-      .then (data => {
-          console.log(data);
-          $loading.hide();
-      });
+    // localListArray=JSON.parse(localStorage.getItem("localListArray"));
+    // console.log(localListArray[1].listName);
+    // console.log(localListArray[2].listData);
+    for (var list=0;list<localListArray.length;list++)
+    {
+        if (localListArray[list].Userlist==1)
+        {          
+            let theRow=list;
+            callDoGet(`?myService=getWordsFromListFromTo&listID=${localListArray[list].listID}&&firstNo=1&lastNo=100000`)
+            .then(function(data) {                     
+                alert(`${localListArray[theRow].listDescription} has been updated`);
+                console.log(data);
+                // console.log(list);
+                console.log(localListArray[theRow].listData);
+                localListArray[theRow].listData = data.slice();
+                load4Selects();
+                $("#Mastered-wordList").val(MasteredWordList).trigger("change");
+                $("#Review-wordList").val(FavouriteWordList).trigger("change");
+                $('#StartID').val(StartWordID).trigger('change'); 
+                $('#EndID').val(EndWordID).trigger('change'); 
+            })
+            .catch(function(v) {
+                console.log(v);
+            });            
+
+        }
+   }
 }
+
+const btnEndLabel = document.getElementById('end_label_ID');
+
+btnEndLabel.addEventListener('click', event => {  
+    console.log(localListArray);
+    console.log(selectedListID);
+    let pos = findListPosition(localListArray,selectedListID);  
+    console.log(localListArray[pos].listData.length);    
+    $('#EndID').val(localListArray[pos].listData.length).trigger('change'); 
+}); 
+
+
+const btnStartLabel = document.getElementById('start_label_ID');
+
+btnStartLabel.addEventListener('click', event => {  
+     
+    $('#StartID').val(1).trigger('change'); 
+});
 
