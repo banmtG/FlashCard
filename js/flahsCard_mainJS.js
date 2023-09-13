@@ -59,6 +59,7 @@ $(document).ready()
     } else 
     {
         $('#loginScreen_DivID').show();
+        $('#optionScreen_DivID').hide();
     }
     //initialiseControl();
    // dealWithOnChange();
