@@ -49,11 +49,16 @@ var $loading = $('#loadingDiv').hide();
 $(document).ready()
 {
     loginStatus_GLOBAL = localStorage.getItem("loginStatus_GLOBAL");
+
+
     if (loginStatus_GLOBAL===`true`)
     {
         LoadScreen2();
         $('#loginScreen_DivID').hide();
         $('#optionScreen_DivID').show();
+    } else 
+    {
+        $('#loginScreen_DivID').show();
     }
     //initialiseControl();
    // dealWithOnChange();

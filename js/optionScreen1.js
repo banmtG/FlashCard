@@ -36,22 +36,27 @@ function LoadScreen2()
         selectStudyListDiv.add(option1);          
     });   
 
+   
     if (JSON.parse(localStorage.getItem("selectedListID")))
     {
         let aListArray = [];
         for (var i=0;i<localListArray.length;i++)
-            aListArray.push(localListArray[i].listID);
-        
+            aListArray.push(localListArray[i].listID.toString());
+       
         const tempLocalListArray = localStorage.getItem("selectedListID");
-        if (aListArray.indexOf(tempLocalListArray)>-1)
-        {
-            selectStudyListDiv.value=tempLocalListArray;           
+        
+        if (aListArray.includes(tempLocalListArray))
+        {           
+            selectStudyListDiv.value=tempLocalListArray;    
+            console.log(selectStudyListDiv);       
         } else 
-        { selectStudyListDiv.value = aListArray[0];}
+        { 
+            selectStudyListDiv.value = aListArray[0];
+
+        }
         //console.log(`selectedListID`, selectedListID);
     } else {
-        selectStudyListDiv.value = 1;
-       
+        selectStudyListDiv.value = 1;       
         //console.log(`vao set 1`);
     };
     //selectedListID=selectStudyListDiv.value;
@@ -622,10 +627,12 @@ const btnLogout = document.getElementById('optionScreen_Logout_SpanID');
 
 btnLogout.addEventListener('click', event => {  
     localStorage.setItem("loginStatus_GLOBAL", `false`); 
-    savePrefsToServer();
+    savePrefsToServer().then(function(data) {      
+        $('#loginScreen_DivID').show();
+        $('#optionScreen_DivID').hide();
+    });
 
-    $('#loginScreen_DivID').show();
-    $('#optionScreen_DivID').hide();
+   
 });
 
 const btnSavePref = document.getElementById('btnSavePref');
@@ -645,7 +652,7 @@ function savePrefsToServer()
         'preferenceArray': localUserPres  
       }  
     $loading.show();
-    fetch (googleAppScriptUrl_GLOBAL ,{
+    return fetch (googleAppScriptUrl_GLOBAL ,{
         method: 'POST',
         body: JSON.stringify(myPostDataObj)
       })
@@ -653,6 +660,8 @@ function savePrefsToServer()
       .then (data => {
           console.log(data);
           $loading.hide();
+          return data;
+        
       });
 
 }
