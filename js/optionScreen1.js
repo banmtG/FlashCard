@@ -1,7 +1,7 @@
-let localUserPres,localListArray;
-let userName, selectedListID=1;
+var localUserPres,localListArray;
+var userName, selectedListID=1;
 
-let StartWordID=1,
+var StartWordID=1,
     EndWordID=1,
     MasteredWordList=[],
     FavouriteWordList=[],
@@ -39,7 +39,7 @@ function LoadScreen2()
    
     if (JSON.parse(localStorage.getItem("selectedListID")))
     {
-        let aListArray = [];
+        var aListArray = [];
         for (var i=0;i<localListArray.length;i++)
             aListArray.push(localListArray[i].listID.toString());
        
@@ -64,12 +64,11 @@ function LoadScreen2()
  
     console.log(`selectedListID`, selectedListID);
 
+    $('#optionScreen_welcomeName_SpanID').html(`Welcome <b style="color: var(--blue-color)">${userName}!</b>`);
+
     initialiseControl();
     load4Selects();
     dealWithOnChange();
-
-    $('#optionScreen_welcomeName_SpanID').html(`Welcome <b style="color: var(--blue-color)">${userName}!</b>`);
-
     loadVariableFromLocalUserPres(selectedListID);
     loadOtherControls();
 }
@@ -163,7 +162,7 @@ function load4Selects() {
     listEnd.innerHTML="";
     listMastered.innerHTML="";
     listReview.innerHTML="";
-    let pos = findListPosition(localListArray,selectedListID);
+    var pos = findListPosition(localListArray,selectedListID);
     console.log(selectedListID);
     // console.log(pos);
     // console.log(localListArray);
@@ -221,10 +220,10 @@ function dealWithOnChange()
        });
 
         $("#StartID" ).on('change', function() { 
-            let aValue=this.value;
+            var aValue=this.value;
             if (aValue<1||aValue=="") aValue=1;
-            let pos = findListPosition(localListArray,selectedListID);  
-            let Max = localListArray[pos].listData.length;
+            var pos = findListPosition(localListArray,selectedListID);  
+            var Max = localListArray[pos].listData.length;
             if (aValue>Max) aValue=Max;
 
             $("#start-number-wordList" ).val(aValue).trigger('change');
@@ -239,10 +238,10 @@ function dealWithOnChange()
         });
   
         $("#EndID" ).on('change', function() {  
-            let aValue=this.value;
+            var aValue=this.value;
             if (aValue<1||aValue=="") aValue=1;
-            let pos = findListPosition(localListArray,selectedListID);  
-            let Max = localListArray[pos].listData.length;
+            var pos = findListPosition(localListArray,selectedListID);  
+            var Max = localListArray[pos].listData.length;
             if (aValue>Max) aValue=Max;
             
 
@@ -303,7 +302,7 @@ function dealWithOnChange()
 
 function savePresToLocalStorage() {
 
-    let pos = findListPositionPres(localUserPres,selectedListID);
+    var pos = findListPositionPres(localUserPres,selectedListID);
     //console.log(pos);       
     
     localUserPres[pos][4]=StartWordID;
@@ -328,7 +327,7 @@ function savePresToLocalStorage() {
 }
 
 function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
+    var currentIndex = array.length,  randomIndex;
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
         // Pick a remaining element.
@@ -355,11 +354,11 @@ function PreparePlaylist()
 
     var rawList=[];
 
-    let pos = findListPosition(localListArray,selectedListID);
+    var pos = findListPosition(localListArray,selectedListID);
     
     for (var jj=parseInt(StartWordID);jj<=parseInt(EndWordID);jj++)
     {              
-        let tempArray = localListArray[pos].listData[jj-1].slice();
+        var tempArray = localListArray[pos].listData[jj-1].slice();
         tempArray.unshift(jj);
         rawList.push(tempArray);
     }
@@ -400,7 +399,7 @@ function PreparePlaylist()
         FlashCardList = MasteredWordList.slice();
     }
 
-    let aTemplist=[];
+    var aTemplist=[];
  //   console.log(`FavouriteWordList`,FavouriteWordList);
 
     if (Playmode=='4') {
@@ -410,8 +409,8 @@ function PreparePlaylist()
         console.log(`numList a`,FlashCardList);
       
         console.log(`FlashCardList a`,FlashCardList);
-        let min =  numList[0];
-        let max =  numList[numList.length-1];
+        var min =  numList[0];
+        var max =  numList[numList.length-1];
         //console.log(`min`,min);
         //console.log(`max`,max);      
         console.log(`FavouriteWordList`,FavouriteWordList);
@@ -494,7 +493,7 @@ function PreparePlaylist()
 }
 
 function sortList(array,rawList,mode) {
-    let aAlphabeticArray = [];
+    var aAlphabeticArray = [];
     for (var i=0;i<array.length;i++)
     {
         for (var j=0;j<rawList.length;j++)
@@ -517,7 +516,7 @@ function sortList(array,rawList,mode) {
 
    // console.log(`aAlphabeticArray`, aAlphabeticArray);
     
-    let resultArray = [];
+    var resultArray = [];
 
     for (var i=0;i<aAlphabeticArray.length;i++)
     {
@@ -544,7 +543,7 @@ btnCook_Run.addEventListener('click', event => {
     PreparePlaylist();   
     if (FlashCardList.length>0)
     {
-        let pos = findListPosition(localListArray,selectedListID);       
+        var pos = findListPosition(localListArray,selectedListID);       
         console.log(localListArray);
         console.log(selectedListID);
         console.log(`pos`, pos);
@@ -570,7 +569,7 @@ btnContinue_Flash_Card.addEventListener('click', event => {
     {
 // if (wordCountingI<StartNumber) wordCountingI=StartNumber;
     
-    let pos = findListPosition(localListArray,selectedListID);
+    var pos = findListPosition(localListArray,selectedListID);
     console.log(localListArray);
     console.log(selectedListID);
     console.log(`pos`, pos);
@@ -594,7 +593,7 @@ btnContinue_Flash_Card.addEventListener('click', event => {
 // 4. Favorite words first
 
 // function Test {
-//     let allUserRelatedDataOb = {
+//     var allUserRelatedDataOb = {
     //     `user`= {           
             //    `userID`:  userID,
             //    `userName`:  userName
@@ -647,7 +646,7 @@ btnSavePref.addEventListener('click', event => {
 
 function savePrefsToServer()
 {  
-    let myPostDataObj = {
+    var myPostDataObj = {
         'myservice': 'upDatePreference',
         'preferenceArray': localUserPres  
       }  
@@ -683,7 +682,7 @@ function refreshData()
     {
         if (localListArray[list].Userlist==1)
         {          
-            let theRow=list;
+            var theRow=list;
             callDoGet(`?myService=getWordsFromListFromTo&listID=${localListArray[list].listID}&&firstNo=1&lastNo=100000`)
             .then(function(data) {                     
                 alert(`${localListArray[theRow].listDescription} has been updated`);
@@ -710,7 +709,7 @@ const btnEndLabel = document.getElementById('end_label_ID');
 btnEndLabel.addEventListener('click', event => {  
     console.log(localListArray);
     console.log(selectedListID);
-    let pos = findListPosition(localListArray,selectedListID);  
+    var pos = findListPosition(localListArray,selectedListID);  
     console.log(localListArray[pos].listData.length);    
     $('#EndID').val(localListArray[pos].listData.length).trigger('change'); 
 }); 

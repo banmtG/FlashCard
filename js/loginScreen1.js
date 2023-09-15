@@ -34,7 +34,7 @@ $('#loginScreen_login_BtnID').click(function(){
         }
         
         if (data.UserID==null) {
-            console.log('wrong password');
+            alert('Wrong Username or Password');
         }
         // userID_GLOBAL = dataUser.UserID;
         // if (userID_GLOBAL!=null) {

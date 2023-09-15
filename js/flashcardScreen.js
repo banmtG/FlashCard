@@ -1,27 +1,30 @@
-let linkBtn = document.getElementsByClassName('btnLink');
+var linkBtn = document.getElementsByClassName('btnLink');
 
 function showWord(theFakeI) 
 {        
-    let i=theFakeI-1;
+     var i=theFakeI-1;
     if (myTimer10!=null) window.clearTimeout(myTimer10);
-    document.getElementById('ACard').innerHTML = "Empty";  
+   document.getElementById('ACard').innerHTML = "Empty";  
     if ((i>=0) && (i< WordListArray.length))
     {                
 
-    let IPA_UK = (WordListArray[i][5]!="")?`/${WordListArray[i][5]}/`:"";
+    var IPA_UK = (WordListArray[i][5]!="")?`/${WordListArray[i][5]}/`:"";
     //console.log(IPA_UK);
-    let IPA_US = (WordListArray[i][6]!="")?`/${WordListArray[i][6]}/`:"";
+    var IPA_US = (WordListArray[i][6]!="")?`/${WordListArray[i][6]}/`:"";
     //console.log(IPA_UK);
 
-    let totalCard = FlashCardList.length;
-    let position = wordCountingI+1;
-    let aString = position + ` / ` + totalCard ;
+    var totalCard = FlashCardList.length;
+    var position = wordCountingI+1;
+    var aString = position + ` / ` + totalCard ;
    
-    document.getElementsByClassName('verticalWord')[0].innerHTML=`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span> <span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span> </div><div class="paging">  
-    <span style="font-size: 0.9rem" id="CardIDNumber"></span>
-    <span style="font-size: 0.6rem" id="Paging"></span>
-    </div>`;
-     
+    // document.getElementsByClassName('verticalWord')[0].innerHTML=`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span> <span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span> </div><div class="paging"><span style="font-size: 0.9rem" id="CardIDNumber"></span><span style="font-size: 0.6rem" id="Paging"></span></div>`;
+
+    // $('.verticalWord').html(`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span><span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span></div><div class="paging"><span style="font-size: 0.9rem" id="CardIDNumber"></span><span style="font-size: 0.6rem" id="Paging"></span></div>`);
+
+    document.getElementsByClassName('verticalWord')[0].innerHTML=`<div class="verticalPart"><span>` + WordListArray[i][0] + `</span><span style="font-weight: 300; font-size:2.5rem; margin: 20px 0;">` + IPA_UK + `</span></div>`;
+
+    $('.verticalWord').append(`<div class="paging1"><div style="font-size: 1.2rem" id="CardIDNumber"></div><div style="font-size: 1.2rem" id="Paging"></div></div>`);
+
     $('#CardIDNumber').text(theFakeI);
 
     if (FavouriteWordList.indexOf(parseInt($('#CardIDNumber').text()))>-1) {
@@ -37,13 +40,19 @@ function showWord(theFakeI)
 
     $('#Paging').text(aString);
 
-    let linkOptions = document.getElementById('selectLinks').options;
+    var linkOptions = document.getElementById('selectLinks').options;
     
     //console.log(linkOptions);
 
-    Array.from(linkOptions).forEach(function (element) {
-        element.title = element.value.replace("theWord", WordListArray[i][0]);
-    });
+    for (var ii=0;ii<linkOptions.length;ii++)
+    {
+        linkOptions[ii].title = linkOptions[ii].value.replace("theWord", WordListArray[i][0]);
+    }
+
+
+    // Array.from(linkOptions).forEach(function (element) {
+    //     element.title = element.value.replace("theWord", WordListArray[i][0]);
+    // });
 
        
     //console.log(linkOptions);
@@ -51,10 +60,19 @@ function showWord(theFakeI)
     // console.log(linkBtn[1].getAttribute('data-value'));
     // linkBtn[1].setAttribute(`data-title`,linkBtn[1].getAttribute('data-value').replace("theWord", WordListArray[i][0])); 
     // console.log(linkBtn[1].getAttribute('data-title'));
-    Array.from(linkBtn).forEach(function (element) {
-        element.setAttribute(`data-title`,element.getAttribute('data-value').replace("theWord", WordListArray[i][0]));
-        // element.title = element.data-value.replace("theWord", WordListArray[i][0]);
-    });
+
+
+    for (var ii=0;ii<linkBtn.length;ii++)
+    {
+    
+        linkBtn[ii].setAttribute(`data-title`,linkBtn[ii].getAttribute('data-value').replace("theWord", WordListArray[i][0]));
+    }
+
+
+    // Array.from(linkBtn).forEach(function (element) {
+    //     element.setAttribute(`data-title`,element.getAttribute('data-value').replace("theWord", WordListArray[i][0]));
+    //     // element.title = element.data-value.replace("theWord", WordListArray[i][0]);
+    // });
 
 
     // linkOptions.forEach((item) => {
@@ -103,7 +121,7 @@ function showWord(theFakeI)
 
     var myElement = document.getElementById('cardBody');
 
-    // create a simple instance
+      // create a simple instance
     // by default, it only adds horizontal recognizers
     var mc = new Hammer(myElement);
 
@@ -118,12 +136,18 @@ function showWord(theFakeI)
         //myElement.textContent = ev.type +" gesture detected.";
     });
 
+ 
+    
     mc.on("tap", function(ev) {
         $('#PausePlay').trigger( "click" );
         //myElement.textContent = ev.type +" gesture detected.";
     });
+ 
 
-    mc.get('pinch').set({ enable: true });
+    // mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+    // mc.get('pinch').set({ enable: true });
+    // mc.get('rotate').set({ enable: true });
+    // mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     
     
     var allVolumeBtn = document.getElementById("ACard").getElementsByClassName("pronounceIcon");
@@ -381,10 +405,25 @@ $('#AddToFavouriteList').on('click', function() {
 
 
 
-Array.from(linkBtn).forEach(function (element) {
-    element.addEventListener('click', (e)=> {
-        var data = element.getAttribute('data-title');        
-        window.open(data,`${element.getAttribute('data-tab')}`);
-    })   
-});
+// $('.btnLink').click(function(event){
+//     console.log(event);
+
+// });
+
+for (var ii=0;ii<linkBtn.length;ii++)
+{
+    linkBtn[ii].addEventListener('click', (e)=> {
+        var data = e.currentTarget.getAttribute('data-title');       
+        console.log(e.currentTarget);        
+        window.open(data,`${ e.currentTarget.getAttribute('data-tab')}`);
+    })      
+}
+
+
+// Array.from(linkBtn).forEach(function (element) {
+//     element.addEventListener('click', (e)=> {
+//         var data = element.getAttribute('data-title');        
+//         window.open(data,`${element.getAttribute('data-tab')}`);
+//     })   
+// });
 

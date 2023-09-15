@@ -1,302 +1,385 @@
 
+
 .Card_container {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0; 
-    background-color:rgb(185, 185, 185);
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(185, 185, 185);
+  overflow:scroll;
 }
 
 .aCardContainer {
-    width: 100%;
-    height:75%;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: row;
 }
 
 .verticalWord {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width:15%;
-    border-right: 1px dotted grey ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 15%;
+  border-right: 1px dotted grey;
 }
 
 .verticalWord .verticalPart {
-    height: 90%;
-    display: flex;
-    font-size: 2.5rem;
-    background-color: white;
-    color: black;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform:scale(-1);
-    line-height: 2rem;
-    font-weight: 700;
-    text-align: center;
-    overflow: hidden;
-    align-items: center;
-    justify-content: space-evenly
-  
+  height: 90%;
+  display: flex;
+  font-size: 2.5rem;
+  background-color: white;
+  color: black;
+  writing-mode: vertical-rl;
+  writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: scale(-1);
+  line-height: 2rem;
+  font-weight: 700;
+  text-align: center;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.verticalWord .paging {
-    height: 10%;
-    display:flex; 
-    flex-direction: column; 
-    justify-content: center;
-    text-align: center;
-    padding:5px;
-    font-size: 1rem;
-    line-height:1.5rem; 
-    transform:scale(1);
-    writing-mode: horizontal-tb;
-    font-weight: 300;
-    background-color: white;
+.paging1 {
+  /* height: 10%; */
+  text-align: center;
+  display: flex;
+  flex-direction: column; 
+  padding: 5px;
+  font-size: 1.2rem;
+  line-height: 1.5rem; 
+  /* transform: rotate(0deg);
+  -webkit-transform: rotate(0deg); */
+  font-weight: 300;
+  background-color: white; 
+  /* height: 10%; */
 }
 
+   
 
-#ACard {   
-    width:85%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding: 10px;  
-    background-color:rgb(252, 252, 252);
+
+#ACard {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 10px;
+  background-color: rgb(252, 252, 252);
 }
 
 #CardLink {
-    font-size: 1.5rem;
-    display: flex;   
-    flex-direction: row;
-    background-color:rgba(255, 255, 255, 1);
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 255, 255, 1);
 }
 
-#CardLink ul,li {
-    font-size: 1.5rem;   
+#CardLink ul,
+li {
+  font-size: 1.5rem;
 }
 
 #ACard .theWord {
-    font-weight: 700;
-    font-size: 3rem;
-    line-height: 3rem;
-    margin-bottom:5px;
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 5px;
 }
 
 #ACard .pronounce {
-    font-weight: 300;
-    font-size: 2rem;
+  font-weight: 300;
+  font-size: 2rem;
 }
 
 #ACard .definition p {
-    font-weight: 300;
-    font-size: 1.4rem;
-    white-space: pre-line;
-    background-color: rgb(228, 228, 228);
-    padding:2px;
-    margin-block: 2px;
+  font-weight: 300;
+  font-size: 1.4rem;
+  white-space: pre-line;
+  background-color: rgb(228, 228, 228);
+  padding: 2px;
+  margin-block: 2px;
 }
 
 #ACard .definition .DefinitionVN {
-    background-color: rgb(255, 255, 255);
-    color: var(--blue-color);
+  background-color: rgb(255, 255, 255);
+  color: var(--blue-color);
 }
-
 
 #ACard .examples {
-    font-weight: 300;
-    font-size: 1.4rem;
-    white-space: pre-line;
-    background-color: rgb(228, 228, 228);
-    padding:2px;
+  font-weight: 300;
+  font-size: 1.4rem;
+  white-space: pre-line;
+  background-color: rgb(228, 228, 228);
+  padding: 2px;
 }
 
-
-#ACard ul,li {
-    font-size: 1.4rem;   
-    margin: 0;
-    padding: 0;
-    font-weight: 300;
-    white-space: pre-line;
+#ACard ul,
+li {
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  white-space: pre-line;
 }
 
-#ACard ul, {
-    counter-reset: foo;
-    display: table;
+#ACard ul {
+  counter-reset: foo;
+  display: table;
 }
 
 #ACard li {
-    list-style: none;
-    counter-increment: foo;
-    display: table-row;
+  list-style: none;
+  counter-increment: foo;
+  display: table-row;
 }
 
 #ACard li::before {
-    content: counter(foo) ".";
-    display: table-cell;
-    text-align: right;
-    padding-right: .3em;
+  content: counter(foo) ".";
+  display: table-cell;
+  text-align: right;
+  padding-right: 0.3em;
 }
 
 #ACard img {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 #CardControl {
-    font-size: 2.5rem;
-    position:relative;
-    display: flex;
-    flex-direction: column;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 21%;
-    background-color:rgba(50, 50, 50, 1);
-    color: white;
+  font-size: 2.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 21%;
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
 }
 
 .ControlRow {
-    display: flex;
-    flex-direction: row;
-    height: 50%;
-    width: 100%;
-    padding: 5px;
+  display: flex;
+  flex-direction: row;
+  height: 50%;
+  width: 100%;
+  padding: 5px;
+  flex-wrap: wrap;
 }
 
 .ControlRow .small {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 20%;
-    border: 1px white dashed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 20%;
+  border: 1px white dashed;
 }
 
 .ControlRow .extended {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 39.9%;
-    border: 1px white dashed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 39.9%;
+  border: 1px white dashed;
 }
 
 .select2-selection--multiple {
-    overflow: hidden !important; 
-    height: 100px !important;
+  overflow: hidden !important;
+  height: 100px !important;
 }
-
-
 
 /* ////////////////////// pronunciation CSS */
 #pronunciationSection {
-    padding:5px;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0; 
-    background-color:rgba(255, 255, 255, 1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;    
-
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .buttonDiv {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 10%;    
-    align-items: stretch;
-    justify-content: center;
-    background-color: rgb(95, 142, 231);
-    border-radius: 5px;
-    border: 1px dashed grey;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10%;
+  align-items: stretch;
+  justify-content: center;
+  background-color: rgb(95, 142, 231);
+  border-radius: 5px;
+  border: 1px dashed grey;
 }
 
 .buttonDiv i {
-    font-size: 3rem;
-    align-self: center;
+  font-size: 3rem;
+  align-self: center;
 }
 
 .pronunDiv {
-    width: 100%;
-    height: 95%;
-    display: flex;
-    flex-direction: row;    
-    flex-wrap: wrap; 
-    overflow: hidden;  
+  width: 100%;
+  height: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .pronunDiv .long {
-    background-color: #FF9301;
+  background-color: #ff9301;
 }
 
 .pronunDiv .short {
-    background-color: #FFC978;
+  background-color: #ffc978;
 }
 
 .pronunDiv .unvoiced {
-    background-color: #FCE0E9;
+  background-color: #fce0e9;
 }
 
 .pronunDiv .voiced {
-    background-color: #7AD9FF;
+  background-color: #7ad9ff;
 }
 
 .pronunDiv .dipthong {
-    background-color: #ABABAA;
+  background-color: #ababaa;
 }
 
 .pronunSectionColumn {
-    display: flex;
-    width: 50%;
-    flex-direction: row;    
-    flex-wrap: wrap;
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .pronunSectionColumn a {
-    text-decoration: none;
-    text-align: center;
-    margin: 2px;
-    padding: 2px;
-    border: 1px dashed grey;
-    width: calc(50% - 4px);      
+  text-decoration: none;
+  text-align: center;
+  margin: 2px;
+  padding: 2px;
+  border: 1px dashed grey;
+  width: calc(50% - 4px);
 }
 
 .pronunSectionColumn a span {
-    font-size: 1rem;
-    font-style: italic;
+  font-size: 1rem;
+  font-style: italic;
 }
 
 #pronunSectionBottom {
-    margin-top:5px;
-    display: flex;
-    width: 100%;
-    flex-direction: row;    
-    flex-wrap: wrap;
-    height: 100px;
+  margin-top: 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100px;
 }
 
 #pronunSectionBottom a {
-    text-decoration: none;
-    text-align: center;
-    padding: 5px;
-    border: 1px dashed grey;
-    height: auto;
-    margin: 2px;
-    width: calc(25% -  4px);      
+  text-decoration: none;
+  text-align: center;
+  padding: 5px;
+  border: 1px dashed grey;
+  height: auto;
+  margin: 2px;
+  width: calc(25% - 4px);
 }
 
 #pronunSectionBottom a span {
-    font-size: 1rem;
-    font-style: italic;
+  font-size: 1rem;
+  font-style: italic;
 }
 
 .btnLink img {
-    height:50%;
+  height: 50%;
+}
+
+
+@media only screen and (max-width: 400px) {
+    .verticalWord { 
+        width: 0;
+    }
+
+    .aCardContainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    #ACard {
+        width: 85%;
+    }
+
+    #CardControl {
+        position: fixed;
+        top:0;
+        left:0;
+        width: 15%;
+        height: 100vh;
+    }
+
+    .ControlRow {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .ControlRow .small {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 7%;
+        width: 99%;
+        border: 1px white dashed;
+     
+    }
+
+    .ControlRow .small i {
+        font-size: 1.7rem;
+     
+    }
+    
+
+    .btnLink img {
+        width: 60%;     
+        height: 80%;  
+    }
+
+    .ControlRow .extended {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20%;
+        width: 99%;
+        border: 1px white dashed;
+    }
+
+    .paging1 {  
+        position: fixed;
+        right: 10px;
+        bottom: 30px;
+        width: 20vw;
+        height: 10vh;
+        z-index:101;
+      }
+
+     #CardLink {
+        position: fixed;
+        width: 100vw;
+        left: 0;
+        bottom: 0;
+        z-index:100;
+      }
 }
