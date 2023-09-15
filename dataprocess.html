@@ -829,11 +829,11 @@ body::-webkit-scrollbar {
             console.log(linkOptions);
 
             Array.from(linkOptions).forEach(function (element) {
-                element.title = element.value.replaceAll("theWord", WordListArray[i].wordString);
+                element.title = element.value.replace("theWord", WordListArray[i].wordString);
             });
 
             // linkOptions.forEach((item) => {
-            //     item.value = item.value.replaceAll("theWord", WordListArray[i].wordString);
+            //     item.value = item.value.replace("theWord", WordListArray[i].wordString);
             // });
 
             document.getElementById('ACard').innerHTML = "";  

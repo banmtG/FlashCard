@@ -42,23 +42,23 @@ function showWord(theFakeI)
     //console.log(linkOptions);
 
     Array.from(linkOptions).forEach(function (element) {
-        element.title = element.value.replaceAll("theWord", WordListArray[i][0]);
+        element.title = element.value.replace("theWord", WordListArray[i][0]);
     });
 
        
     //console.log(linkOptions);
 
     // console.log(linkBtn[1].getAttribute('data-value'));
-    // linkBtn[1].setAttribute(`data-title`,linkBtn[1].getAttribute('data-value').replaceAll("theWord", WordListArray[i][0])); 
+    // linkBtn[1].setAttribute(`data-title`,linkBtn[1].getAttribute('data-value').replace("theWord", WordListArray[i][0])); 
     // console.log(linkBtn[1].getAttribute('data-title'));
     Array.from(linkBtn).forEach(function (element) {
-        element.setAttribute(`data-title`,element.getAttribute('data-value').replaceAll("theWord", WordListArray[i][0]));
-        // element.title = element.data-value.replaceAll("theWord", WordListArray[i][0]);
+        element.setAttribute(`data-title`,element.getAttribute('data-value').replace("theWord", WordListArray[i][0]));
+        // element.title = element.data-value.replace("theWord", WordListArray[i][0]);
     });
 
 
     // linkOptions.forEach((item) => {
-    //     item.value = item.value.replaceAll("theWord", WordListArray[i].wordString);
+    //     item.value = item.value.replace("theWord", WordListArray[i].wordString);
     // });
 
     document.getElementById('ACard').innerHTML = "";  
