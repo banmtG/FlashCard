@@ -149,7 +149,27 @@ function showWord(theFakeI)
     // mc.get('rotate').set({ enable: true });
     // mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     
+    if (HideDefinitionID.checked==true) {
+            $('#cardBody').hide(); 
+            console.log('vao hide');
+    }
+    else {
+            $('#cardBody').show(); 
+            console.log('vao show');
+    }    
+   
+    $('.paging1').click(function(){
+        if (HideDefinitionID.checked==true) {
+            HideDefinitionID.checked=false;
+            $('#cardBody').show(); 
+        } else {
+            HideDefinitionID.checked=true;
+            $('#cardBody').hide(); 
+        }
+    })
     
+
+
     var allVolumeBtn = document.getElementById("ACard").getElementsByClassName("pronounceIcon");
   
     allVolumeBtn[0].addEventListener('click', function(event) {

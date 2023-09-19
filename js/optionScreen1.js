@@ -722,3 +722,9 @@ btnStartLabel.addEventListener('click', event => {
     $('#StartID').val(1).trigger('change'); 
 });
 
+
+const HideDefinitionID = document.getElementById('HideDefinitionID');
+
+
+console.log(HideDefinitionID);
+console.log('vao obtop');

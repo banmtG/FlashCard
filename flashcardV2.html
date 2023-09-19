@@ -65,14 +65,14 @@
 
                                   
                     <div class="classStartNumber">
-                        <label style="width: 50px" for="number-pattern" id="start_label_ID">Start: </label>
+                        <label style="width: 50px" id="start_label_ID">Start: </label>
                         <input style="margin-right: 5px; width: 60px;" type="number" name="number" pattern="[0-9]*" id="StartID" value="0"> 
                         <select class="flexGrowSelect" style="flex-grow:1 !important" id="start-number-wordList"></select >
                     </div>
                     
             
                     <div class="classEndNumber">
-                        <label style="width: 50px" for="number-pattern" id="end_label_ID">End: </label>
+                        <label style="width: 50px" id="end_label_ID">End: </label>
                         <input style="margin-right: 5px; width: 60px;"  type="number" name="number" pattern="[0-9]*" id="EndID" value="50"> 
                         <select class="flexGrowSelect" style="flex-grow:1" id="end-number-wordList"></select >
                     </div>
@@ -114,6 +114,8 @@
                     <div class="classWaitingTime">
                         <label>Interval (ms):</label>
                         <input style="width: 100px;"type="number" name="number" pattern="[0-9]*" id="WaitTime" value="5000">
+                        <label>Hide Def:</label>
+                        <input id="HideDefinitionID" type="checkbox"">
                     </div>
             
                     <div class="classButtons">
