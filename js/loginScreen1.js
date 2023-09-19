@@ -67,11 +67,7 @@ $('#loginScreen_login_BtnID').click(function(){
     .catch(function(v) {
         console.log(v);
     });
-    
-    
-    
-    
-    
+       
     // fetch_GAS_Data_ByService('checkUser')
     // .then(function(dataUser) {       
     //     console.log(dataUser.UserID);
@@ -103,3 +99,8 @@ $('#loginScreen_login_BtnID').click(function(){
 
 })
 
+$("#loginScreen_password_TextID").keyup(function (event) {
+    if (event.keyCode === 13) {
+        $('#loginScreen_login_BtnID').click();
+    }
+});
