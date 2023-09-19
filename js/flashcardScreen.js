@@ -150,21 +150,26 @@ function showWord(theFakeI)
     // mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     
     if (HideDefinitionID.checked==true) {
-            $('#cardBody').hide(); 
+            $('.definition').hide(); 
+            $('.examples').hide(); 
+            
             console.log('vao hide');
     }
     else {
-            $('#cardBody').show(); 
+            $('.definition').show(); 
+            $('.examples').show(); 
             console.log('vao show');
     }    
    
     $('.paging1').click(function(){
         if (HideDefinitionID.checked==true) {
             HideDefinitionID.checked=false;
-            $('#cardBody').show(); 
+            $('.definition').show(); 
+            $('.examples').show(); 
         } else {
             HideDefinitionID.checked=true;
-            $('#cardBody').hide(); 
+            $('.definition').hide(); 
+            $('.examples').hide();
         }
     })
     
