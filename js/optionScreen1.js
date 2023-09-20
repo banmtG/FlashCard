@@ -689,17 +689,17 @@ function refreshData()
             .then(function(data) {                     
                 
               //  alert(`Data has been updated`);
-                console.log(data.listID);
-                console.log(data.data);
-                console.log(localListArray);
+               // console.log(data.listID);
+              //  console.log(data.data);
+               // console.log(localListArray);
                 for (let count=0;count<localListArray.length;count++)
                 {
                     if (data.listID==localListArray[count].listID)
                     {
                         alert(`${localListArray[count].listDescription} has been updated`);
-                        console.log(localListArray[count].listData);
+                       // console.log(localListArray[count].listData);
                         localListArray[count].listData = data.data.slice();
-                        console.log(localListArray[count].listData);
+                        //console.log(localListArray[count].listData);
                         localStorage.setItem("localListArray", JSON.stringify(localListArray));
                         localListArray=JSON.parse(localStorage.getItem("localListArray"));
                        // console.log(localListArray);
