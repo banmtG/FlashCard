@@ -678,18 +678,22 @@ function refreshData()
     // localListArray=JSON.parse(localStorage.getItem("localListArray"));
     // console.log(localListArray[1].listName);
     // console.log(localListArray[2].listData);
+    //let announcementList = [];
     for (var list=0;list<localListArray.length;list++)
     {
         if (localListArray[list].Userlist==1)
         {          
             var theRow=list;
+            //announcementList.push(theRow);
             callDoGet(`?myService=getWordsFromListFromTo&listID=${localListArray[list].listID}&&firstNo=1&lastNo=100000`)
             .then(function(data) {                     
-                alert(`${localListArray[theRow].listDescription} has been updated`);
+                //alert(`${localListArray[theRow].listDescription} has been updated`);
+                alert(`Data has been updated`);
                 console.log(data);
                 // console.log(list);
                 console.log(localListArray[theRow].listData);
                 localListArray[theRow].listData = data.slice();
+                localStorage.setItem("localListArray", JSON.stringify(localListArray));
                 load4Selects();
                 $("#Mastered-wordList").val(MasteredWordList).trigger("change");
                 $("#Review-wordList").val(FavouriteWordList).trigger("change");
