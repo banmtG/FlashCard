@@ -685,20 +685,32 @@ function refreshData()
         {          
             var theRow=list;
             //announcementList.push(theRow);
-            callDoGet(`?myService=getWordsFromListFromTo&listID=${localListArray[list].listID}&&firstNo=1&lastNo=100000`)
+            callDoGet(`?myService=getWordsFromListFromTo&listID=${localListArray[list].listID}&&firstNo=1&lastNo=1000000`)
             .then(function(data) {                     
-                //alert(`${localListArray[theRow].listDescription} has been updated`);
-                alert(`Data has been updated`);
-                console.log(data);
-                // console.log(list);
-                console.log(localListArray[theRow].listData);
-                localListArray[theRow].listData = data.slice();
-                localStorage.setItem("localListArray", JSON.stringify(localListArray));
-                load4Selects();
-                $("#Mastered-wordList").val(MasteredWordList).trigger("change");
-                $("#Review-wordList").val(FavouriteWordList).trigger("change");
-                $('#StartID').val(StartWordID).trigger('change'); 
-                $('#EndID').val(EndWordID).trigger('change'); 
+                
+              //  alert(`Data has been updated`);
+                console.log(data.listID);
+                console.log(data.data);
+                console.log(localListArray);
+                for (let count=0;count<localListArray.length;count++)
+                {
+                    if (data.listID==localListArray[count].listID)
+                    {
+                        alert(`${localListArray[count].listDescription} has been updated`);
+                        console.log(localListArray[count].listData);
+                        localListArray[count].listData = data.data.slice();
+                        console.log(localListArray[count].listData);
+                        localStorage.setItem("localListArray", JSON.stringify(localListArray));
+                        localListArray=JSON.parse(localStorage.getItem("localListArray"));
+                       // console.log(localListArray);
+                        load4Selects();
+                        $("#Mastered-wordList").val(MasteredWordList).trigger("change");
+                        $("#Review-wordList").val(FavouriteWordList).trigger("change");
+                        $('#StartID').val(StartWordID).trigger('change'); 
+                        $('#EndID').val(EndWordID).trigger('change'); 
+                    }
+                }
+              //  
             })
             .catch(function(v) {
                 console.log(v);
@@ -706,6 +718,7 @@ function refreshData()
 
         }
    }
+  
 }
 
 const btnEndLabel = document.getElementById('end_label_ID');
