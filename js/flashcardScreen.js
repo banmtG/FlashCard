@@ -1,4 +1,6 @@
 var linkBtn = document.getElementsByClassName('btnLink');
+const myAudioUK = document.getElementById('myAudioUK');
+const myAudioUS = document.getElementById('myAudioUS');
 
 function showWord(theFakeI) 
 {        
@@ -91,7 +93,7 @@ function showWord(theFakeI)
     $("#cardBody").append(`<img class="illustration"src="`+ WordListArray[i][4] + `">`);
 
     
-    const myAudioUK = document.getElementById('myAudioUK');
+   
     if (WordListArray[i][7]=="") {
         myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=1";
     } else {
@@ -109,7 +111,7 @@ function showWord(theFakeI)
         });
     }
     
-    const myAudioUS = document.getElementById('myAudioUS');
+
 
     if (WordListArray[i][8]=="") {
         myAudioUS.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=2";
@@ -211,7 +213,7 @@ function playSoundUntilCarouselPlay()
 
 
 timer10 = function() {
-    const myAudioUK = document.getElementById('myAudioUK');
+    // const myAudioUK = document.getElementById('myAudioUK');
     myAudioUK.play();
     myTimer10 =  setTimeout(timer10, 3000);
 }
