@@ -454,3 +454,16 @@ for (var ii=0;ii<linkBtn.length;ii++)
 //     })   
 // });
 
+$(document).keydown( function(eventObject) {
+    console.log(eventObject.which);
+    if(eventObject.which==39) {//right arrow 
+        $('#NextCard').trigger( "click" );//emulates click on prev button 
+    } else if(eventObject.which==37) {//left arrow
+        $('#PreviousCard').trigger( "click" );//emulates click on next button
+    } else if(eventObject.which==32) {
+        $('#PausePlay').trigger( "click" );
+    }
+} );
+
+
+
