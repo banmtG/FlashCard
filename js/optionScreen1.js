@@ -307,12 +307,14 @@ function savePresToLocalStorage() {
     
     localUserPres[pos][4]=StartWordID;
     localUserPres[pos][5]=EndWordID;
-    //console.log(`truoc`, MasteredWordList);       
+    //console.log(`truoc`, MasteredWordList);      
+
+    console.log(`MasteredWordList truoc`, MasteredWordList);       
     
     if (MasteredWordList!="NaN")
     localUserPres[pos][2]=MasteredWordList.join(',');
-   // console.log(`sau`, MasteredWordList);       
-    
+    console.log(`MasteredWordList sau`, MasteredWordList);       
+   
     if (FavouriteWordList!="NaN")
     localUserPres[pos][3]=FavouriteWordList.join(',');
     if (FlashCardList!="NaN")
@@ -626,10 +628,11 @@ const btnLogout = document.getElementById('optionScreen_Logout_SpanID');
 
 btnLogout.addEventListener('click', event => {  
     localStorage.setItem("loginStatus_GLOBAL", `false`); 
-    savePrefsToServer().then(function(data) {      
-        $('#loginScreen_DivID').show();
-        $('#optionScreen_DivID').hide();
-    });
+    $('#loginScreen_DivID').show();
+    $('#optionScreen_DivID').hide();
+    // savePrefsToServer().then(function(data) {      
+      
+    // });
 
    
 });
@@ -637,6 +640,7 @@ btnLogout.addEventListener('click', event => {
 const btnSavePref = document.getElementById('btnSavePref');
 
 btnSavePref.addEventListener('click', event => {  
+    
     localUserPres=JSON.parse(localStorage.getItem("localUserPres"));
     //console.log(`localUserPres`, localUserPres);
     savePrefsToServer();
@@ -650,6 +654,7 @@ function savePrefsToServer()
         'myservice': 'upDatePreference',
         'preferenceArray': localUserPres  
       }  
+    console.log(localUserPres);
     $loading.show();
     return fetch (googleAppScriptUrl_GLOBAL ,{
         method: 'POST',
