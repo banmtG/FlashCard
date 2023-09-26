@@ -748,5 +748,7 @@ btnStartLabel.addEventListener('click', event => {
 const HideDefinitionID = document.getElementById('HideDefinitionID');
 
 
+const AutoSound = document.getElementById('AutoSound');
+
 console.log(HideDefinitionID);
 console.log('vao obtop');

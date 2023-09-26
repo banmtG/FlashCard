@@ -100,6 +100,8 @@ function showWord(theFakeI)
         myAudioUK.src=`https://dictionary.cambridge.org/media/english/uk_pron` + WordListArray[i][7];
     }
 
+    if (AutoSound.checked==true) {
+
     var playPromise = myAudioUK.play();
 
     if (playPromise !== undefined) {
@@ -111,6 +113,7 @@ function showWord(theFakeI)
         });
     }
     
+    }   
 
 
     if (WordListArray[i][8]=="") {
@@ -151,7 +154,10 @@ function showWord(theFakeI)
     // mc.get('rotate').set({ enable: true });
     // mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     
-    if (HideDefinitionID.checked==true) {
+
+
+
+    if (HideDefinitionID.checked==false) {
             $('.definition').hide(); 
             $('.examples').hide(); 
             
@@ -162,14 +168,16 @@ function showWord(theFakeI)
             $('.examples').show(); 
             console.log('vao show');
     }    
+
+    
    
     $('.paging1').click(function(){
-        if (HideDefinitionID.checked==true) {
-            HideDefinitionID.checked=false;
+        if (HideDefinitionID.checked==false) {
+            HideDefinitionID.checked=true;
             $('.definition').show(); 
             $('.examples').show(); 
         } else {
-            HideDefinitionID.checked=true;
+            HideDefinitionID.checked=false;
             $('.definition').hide(); 
             $('.examples').hide();
         }
@@ -215,7 +223,7 @@ function playSoundUntilCarouselPlay()
 timer10 = function() {
     // const myAudioUK = document.getElementById('myAudioUK');
     myAudioUK.play();
-    myTimer10 =  setTimeout(timer10, 3000);
+    myTimer10 =  setTimeout(timer10, 5000);
 }
 
 
