@@ -108,8 +108,9 @@ function showWord(theFakeI)
         playPromise.then(function() {
             myAudioUK.play();
         }).catch(function(error) {
-            myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=1";
-            myAudioUK.play();
+            // myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=1";
+            // myAudioUK.play();
+            fromText2Speed(WordListArray[i][0]);
         });
     }
     
@@ -217,6 +218,13 @@ function showWord(theFakeI)
 function playSoundUntilCarouselPlay() 
 {
     timer10();
+}
+
+function fromText2Speed(phrase)
+{
+    let speech = new SpeechSynthesisUtterance(phrase);            
+        // Speak the text
+    window.speechSynthesis.speak(speech);
 }
 
 
