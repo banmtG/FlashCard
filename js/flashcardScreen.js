@@ -112,9 +112,10 @@ function showWord(theFakeI)
             // myAudioUK.play();
             //fromText2Speed(WordListArray[i][0]);
             speakText(WordListArray[i][0], {
+                voiceName = `Google UK English Male`,
                 lang: 'en-GB',  // British English
                 pitch: 1,     
-                rate: 1.0,
+                rate: 0.8,
                 volume: 1.0
             });
         });
