@@ -110,7 +110,13 @@ function showWord(theFakeI)
         }).catch(function(error) {
             // myAudioUK.src="https://dict.youdao.com/dictvoice?audio=" + WordListArray[i][0]  + " &type=1";
             // myAudioUK.play();
-            fromText2Speed(WordListArray[i][0]);
+            //fromText2Speed(WordListArray[i][0]);
+            speakText(WordListArray[i][0], {
+                lang: 'en-GB',  // British English
+                pitch: 1,     
+                rate: 1.0,
+                volume: 1.0
+            });
         });
     }
     
@@ -227,6 +233,45 @@ function fromText2Speed(phrase)
     window.speechSynthesis.speak(speech);
 }
 
+function speakText(text, options = {}) {
+    const synth = window.speechSynthesis;
+    let voices = synth.getVoices();
+
+    // Default options
+    let {
+        voiceName = '',  // Specific voice name (if known)
+        lang = 'en-US',  // Default to American English
+        pitch = 1.0,     // Default pitch (range: 0 to 2)
+        rate = 1.0,      // Default speed (range: 0.1 to 10)
+        volume = 1.0     // Default volume (range: 0 to 1)
+    } = options;
+
+    // Wait for voices to load asynchronously
+    if (voices.length === 0) {
+        synth.onvoiceschanged = () => {
+            voices = synth.getVoices();
+            speakText(text, options); // Retry once voices are loaded
+        };
+        return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    // Try to find a voice that matches the user's preference
+    if (voiceName) {
+        utterance.voice = voices.find(voice => voice.name === voiceName) || null;
+    } else {
+        utterance.voice = voices.find(voice => voice.lang === lang) || null;
+    }
+
+    // Apply pitch, rate, and volume
+    utterance.pitch = pitch;
+    utterance.rate = rate;
+    utterance.volume = volume;
+
+    // Speak the text
+    synth.speak(utterance);
+}
 
 timer10 = function() {
     // const myAudioUK = document.getElementById('myAudioUK');
